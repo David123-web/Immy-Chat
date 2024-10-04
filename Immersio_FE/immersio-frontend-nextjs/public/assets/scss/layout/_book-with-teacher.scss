@@ -1,0 +1,336 @@
+@use '../utils' as *;
+
+/*----------------------------------------*/
+/*  17. TEAM CSS START
+/*----------------------------------------*/
+
+.book-with-teacher {
+    // &__area {
+    //     background-color: #ddf1f0;
+    // }
+    &__block {
+        .book-block-filter {
+            &__select,
+            &__time-picker,
+            &__date-range {
+                flex: 1;
+                margin: 0 5px;
+            }
+
+            &__time-picker {
+                position: relative;
+
+                .item {
+                    background-color: var(--tp-new_theme-7);
+                    border: 1px solid #d9d9d9;
+                    border-radius: 2px;
+                    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+                    min-height: 38px;
+                    padding: 0 11px;
+                    font-size: 16px;
+                    cursor: pointer;
+
+                    .placeholder-color {
+                        color: #bfbfbf;
+                    }
+
+                    &:hover {
+                        border-color: var(--tp-new_theme-3);
+                        border-right-width: 1px;
+                    }
+                }
+                .box {
+                    &.hide {
+                        display: none;
+                    }
+                    &.block {
+                        display: block;
+                    }
+                    position: absolute;
+                    min-width: 280px;
+                    min-height: 280px;
+                    top: 100%;
+                    margin-top: 3px;
+                    left: 0;
+                    padding: 15px;
+
+                    background-color: var(--tp-new_theme-7);
+                    border: 1px solid #d9d9d9;
+                    border-radius: 2px;
+                    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+                    .days-of-week,
+                    .time-of-day {
+                        > span {
+                            font-weight: bold;
+                        }
+                    }
+
+                    .days-of-week {
+                        .box-days {
+                            border: 1px solid #ddd;
+                            border-radius: 4px;
+                            span {
+                                border-right: 1px solid #ddd;
+                                flex: 1;
+                                font-size: 12px;
+                                text-align: center;
+                                line-height: 30px;
+                                cursor: pointer;
+
+                                &:last-child {
+                                    border-right: 0 none;
+                                }
+
+                                &:hover {
+                                    background-color: #ddd;
+                                }
+                            }
+                        }
+                    }
+
+                    .time-of-day {
+                        .box-time {
+                            border-radius: 4px;
+                            border-left: 1px solid #ddd;
+                            border-bottom: 1px solid #ddd;
+
+                            .box-time-item {
+                                width: 25%;
+                                min-height: 75px;
+                                border-top: 1px solid #ddd;
+                                border-right: 1px solid #ddd;
+
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                text-align: center;
+
+                                padding: 10px 0;
+
+                                &__icon {
+                                    width: 18px;
+                                    height: 18px;
+                                    background-color: #ddd;
+                                    margin-bottom: 5px;
+                                }
+
+                                &__range-time {
+                                    font-size: 11px;
+                                    font-weight: bold;
+                                }
+
+                                &__range-zone {
+                                    font-size: 10px;
+                                    line-height: 12px;
+                                    color: #888;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            &__date-range {
+                .DateRangePickerInput__withBorder {
+                    border-radius: 0.25rem;
+                }
+
+                .DateRangePickerInput__withBorder {
+                    height: 38px;
+                }
+
+                .DateInput {
+                    width: 40%;
+                }
+
+                .DateInput_input {
+                    padding: 5px 11px 5px;
+                    font-size: 16px;
+                }
+            }
+
+            &__search {
+                button {
+                    width: 38px;
+                    height: 38px;
+                    background-color: var(--tp-new_theme-3);
+                    border-radius: 2px;
+                    color: var(--tp-new_theme-7);
+                    padding: 0;
+                    outline: none;
+                    border: 0 none;
+                }
+            }
+        }
+
+        .book-block-wrapper {
+            &__item {
+                background: var(--tp-new_theme-7) 0% 0% no-repeat padding-box;
+                box-shadow: 0px 8px 16px #00000029;
+                border-radius: 16px;
+                padding: 14px 16px;
+                margin-bottom: 30px;
+
+                display: flex;
+                align-items: center;
+
+                .photo {
+                    img {
+                        min-width: 150px;
+                        max-width: 150px;
+                        border-radius: 10px;
+                    }
+                    
+                }
+
+                .info {
+                    padding: 0 12px;
+                    flex: 1;
+
+                    &__name {
+                        text-align: left;
+                        font: normal normal bold 18px/21px Roboto;
+                        letter-spacing: 0px;
+                        color: #454545;
+
+                        a {
+                            color: #454545;
+                        }
+                    }
+
+                    &__address {
+                        text-align: left;
+                        font: normal normal bold 12px/14px Roboto;
+                        letter-spacing: 0px;
+                        color: var(--tp-new_theme-3);
+                        margin: 2px 0 5px 0;
+                    }
+
+                    &__lesson {
+                        text-align: left;
+                        font: normal normal normal 12px/14px Roboto;
+                        color: #454545;
+                        margin: 0;
+                    }
+
+                    &__about {
+                        margin: 10px 0 0 0;
+                        text-align: left;
+                        font: normal normal normal 14px/20px Roboto;
+                        color: #2E2020;
+                    }
+                }
+
+                .actions {
+                    &__rating-price {
+                        .book-rating {
+                            .ratings {
+                                i {
+                                    color: var(--tp-new_theme-5);
+                                }
+                                span {
+                                    font: normal normal medium 17px/20px Roboto;
+                                    letter-spacing: 0px;
+                                    color: var(--tp-new_theme-3);
+                                    opacity: 1;
+                                }
+                            }
+                            .review-count {
+                                margin-bottom: 0;
+                                text-align: left;
+                                font: normal normal normal 14px/20px Roboto;
+                                letter-spacing: 0px;
+                                color: #636363;
+                            }
+                        }
+                        .book-price {
+                            span {
+                                font: normal normal medium 17px/20px Roboto;
+                                letter-spacing: 0px;
+                                color: var(--tp-new_theme-3);
+                            }
+                            p {
+                                margin-bottom: 0;
+                                text-align: left;
+                                font: normal normal normal 14px/20px Roboto;
+                                letter-spacing: 0px;
+                                color: #636363;
+                            }
+                        }   
+                    }
+                    &__message {
+                        margin-top: 10px;
+
+                        button {
+                            min-height: auto;
+                            height: 44px;
+                            min-width: 280px;
+                            width: 280px;
+                            /* UI Properties */
+                            background: #ddf1f0 0% 0% no-repeat padding-box;
+                            box-shadow: 0px 3px 6px #00000029;
+                            border-color: var(--tp-new_theme-2);
+                            border-radius: 10px;
+                            width: 100%;
+
+                            font: normal normal medium 16px/31px Roboto;
+                            letter-spacing: 0.16px;
+                            color: var(--tp-new_theme-3);
+                        }
+                    }
+                    &__book {
+                        margin-top: 10px;
+
+                        button {
+                            min-height: auto;
+                            height: 44px;
+                            min-width: 280px;
+                            width: 280px;
+                            /* UI Properties */
+                            background: var(--tp-new_theme-5) 0% 0% no-repeat padding-box;
+                            box-shadow: 0px 3px 6px #00000029;
+                            border-radius: 10px;
+                            width: 100%;
+
+                            font: normal normal medium 16px/31px Roboto;
+                            letter-spacing: 0.16px;
+                            color: var(--tp-new_theme-7);
+                        }
+                    }
+                }
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                &.desktop {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    box-shadow: none;
+
+                    .photo {
+                        width: 100%;
+                        margin-bottom: 20px;
+
+                        img {
+                            min-width: 100%;
+                            max-width: 100%;
+                        }
+                    }
+
+                    .info {
+                        padding-left: 0;
+                        padding-right: 0;
+
+                        &__about {
+                            margin: 20px 0;
+                            height: 60px;
+                            overflow: hidden;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

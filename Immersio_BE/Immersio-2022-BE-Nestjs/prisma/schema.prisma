@@ -1,0 +1,1666 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator kysely {
+  provider     = "prisma-kysely"
+  // Optionally provide a destination directory for the generated file
+  // and a filename of your choice
+  output       = "../kysely"
+  fileName     = "types.ts"
+  // Optionally generate runtime enums to a separate file
+  enumFileName = "enums.ts"
+}
+
+model SocialAuthen {
+  id          String          @id
+  type        SocialMediaType
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  user        User?
+  subdomain   Subdomain?      @relation(fields: [subdomainId], references: [id])
+  subdomainId String?
+}
+
+model Subdomain {
+  id                     String                  @id @default(cuid())
+  name                   String                  @unique
+  settingId              Int?                    @unique
+  packageId              String?
+  updatedAt              DateTime                @updatedAt
+  createdAt              DateTime                @default(now())
+  users                  User[]
+  levels                 Level[]
+  courses                Course[]
+  lessons                Lesson[]
+  country                Country?
+  language               CourseLanguage?         @relation(fields: [courseLanguageId], references: [id])
+  proficiencyLevel       ProficiencyLevel?
+  settings               Setting[]
+  roleManagement         RoleManagement[]
+  onlinePaymentGateWays  OnlinePaymentGateWay[]
+  offlinePaymentGateways OfflinePaymentGateway[]
+  subscriptions          Subscription[]
+  subscriptionPlans      SubscriptionPlan[]
+  dialogAIDatas          DialogAIData[]
+  socialAuthens          SocialAuthen[]
+  faqs                   FAQ[]
+  isActive               Boolean                 @default(false)
+  subdomainTheme         SubdomainTheme?         @relation(fields: [subdomainThemeId], references: [id])
+  subdomainThemeId       Int?
+  expiredAt              DateTime?
+  sendInvoiceCount       Int?                    @default(0)
+  remindCount            Int?                    @default(0)
+  title                  String?
+  description            String?
+  keyword                String?
+  campuses               Campus[]
+  plans                  Plan[]
+  setting                SubdomainSetting?
+  courseLanguageId       Int?
+  blogCategories         BlogCategory[]
+  blogs                  Blog[]
+  faqCategories          FAQCategory[]
+  banners                Banner[]
+  subdomainSocialLinks   SubdomainSocialLink[]
+  emailTemplates         EmailTemplate[]
+  invoices               Invoice[]
+  subdomainBilling       SubdomainBilling?
+  transactions           Transaction[]
+  coupons                Coupon[]
+  classTags              ClassTag[]
+  tags                   Tag[]
+  dialogCharacters       DialogCharacter[]
+  classSessionReports    ClassSessionReport[]
+  courseStudents         CourseStudent[]
+}
+
+model SubdomainTheme {
+  id              Int         @id @default(autoincrement())
+  primaryColor    String?
+  secondaryColor  String?
+  accentColor     String?
+  backgroundColor String?
+  textColor       String?
+  linkColor       String?
+  logoUrl         String?
+  faviconUrl      String?
+  subdomains      Subdomain[]
+}
+
+model User {
+  id                   String                @id @default(cuid())
+  email                String?
+  subdomainId          String?
+  socialAuthenId       String?               @unique
+  isDeleted            Boolean               @default(false)
+  password             String?
+  isVerified           Boolean               @default(false)
+  isFirstTimeLogin     Boolean               @default(false)
+  role                 Role                  @default(STUDENT)
+  stripeAccountId      String?               @unique
+  paypalAccountId      String?               @unique
+  profile              Profile?
+  tags                 Tag[]
+  files                File[]
+  levels               Level[]
+  courses              Course[]
+  lessons              Lesson[]
+  folders              Folder[]
+  settings             Setting[]
+  thumbnails           Thumbnail[]
+  magicTokens          MagicToken[]
+  notifications        Notification[]
+  sections             CourseSection[]
+  notificationTokens   NotificationToken[]
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+  subdomain            Subdomain?            @relation(fields: [subdomainId], references: [id])
+  socialAuthen         SocialAuthen?         @relation(fields: [socialAuthenId], references: [id])
+  subscriptions        Subscription[]
+  courseTrackings      CourseTracking[]
+  transactions         Transaction[]
+  isActive             Boolean               @default(true)
+  deletedAt            DateTime?
+  voiceRecords         VoiceRecord[]
+  status               UserStatus            @default(PENDING)
+  classTags            ClassTag[]
+  availableTimes       AvailableTime[]
+  classBookings        ClassBooking[]
+  classLessonsComplete ClassLessonComplete[]
+  availableCredits     Float                 @default(0)
+  bookedCredits        Float                 @default(0)
+  usedCredits          Float                 @default(0)
+  CourseStudent        CourseStudent[]
+}
+
+model Setting {
+  id          Int        @id @default(autoincrement())
+  userId      String?
+  subdomainId String?
+  key         String
+  value       String
+  updatedAt   DateTime   @updatedAt
+  createdAt   DateTime   @default(now())
+  user        User?      @relation(fields: [userId], references: [id])
+  subdomain   Subdomain? @relation(fields: [subdomainId], references: [id])
+}
+
+model SubdomainSetting {
+  id                           Int              @id @default(autoincrement())
+  paypalActive                 Boolean          @default(false)
+  paypalTestMode               Boolean          @default(true)
+  paypalClientId               String?
+  paypalClientSecret           String?
+  stripeActive                 Boolean          @default(false)
+  stripeKey                    String?
+  stripeSecret                 String?
+  googleClientId               String?
+  googleClientSecret           String?
+  googleRefreshToken           String?
+  address                      String?
+  email                        String?
+  contactNumber                String?
+  socialLinks                  String?
+  supportLinks                 String?
+  emailFrom                    String?
+  emailName                    String?
+  emailSMTPHost                String?
+  emailSMTPSecure              EmailSMTPSecure?
+  emailSMTPPort                Int?
+  emailSMTPAuth                Boolean?
+  emailSMTPUsername            String?
+  emailSMTPPassword            String?
+  daysBeforeExpirationReminder Int?             @default(3)
+  createdAt                    DateTime         @default(now())
+  updatedAt                    DateTime         @updatedAt
+  subdomain                    Subdomain        @relation(fields: [subdomainId], references: [id])
+  subdomainId                  String           @unique
+  currency                     CurrencyOption?  @default(USD)
+  creditValue                  Float            @default(1)
+  freeCourses                  Int              @default(10)
+}
+
+model RootSetting {
+  key       RootSettingKey @id()
+  value     String
+  updatedAt DateTime       @updatedAt
+  createdAt DateTime       @default(now())
+}
+
+model Currency {
+  code      String    @id
+  name      String
+  rate      Float
+  profiles  Profile[]
+  updatedAt DateTime  @updatedAt
+  createdAt DateTime  @default(now())
+}
+
+model Language {
+  code        String   @id
+  subdomainId String?  @unique
+  name        String
+  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now())
+}
+
+model Country {
+  code        String       @id
+  subdomainId String?      @unique
+  dialCode    String
+  name        String
+  emoji       String?
+  instructors Instructor[]
+  updatedAt   DateTime     @updatedAt
+  createdAt   DateTime     @default(now())
+  subdomain   Subdomain?   @relation(fields: [subdomainId], references: [id])
+  tutors      Tutor[]
+  campuses    Campus[]
+}
+
+model ProficiencyLevel {
+  code        String       @id
+  subdomainId String?      @unique
+  name        String
+  instructors Instructor[]
+  updatedAt   DateTime     @updatedAt
+  createdAt   DateTime     @default(now())
+  subdomain   Subdomain?   @relation(fields: [subdomainId], references: [id])
+  tutors      Tutor[]
+}
+
+model Invitation {
+  id           Int         @id @default(autoincrement())
+  instructorId Int?
+  courseId     Int?
+  instructor   Instructor? @relation(fields: [instructorId], references: [id])
+  course       Course?     @relation(fields: [courseId], references: [id])
+  updatedAt    DateTime    @updatedAt
+  createdAt    DateTime    @default(now())
+}
+
+model Profile {
+  id                Int              @id @default(autoincrement())
+  userId            String           @unique
+  instructorId      Int?             @unique
+  avatarUrl         String?
+  firstName         String?
+  lastName          String?
+  gender            Gender           @default(OTHER)
+  dob               DateTime?
+  address           String?
+  currencyCode      String?
+  isApproved        Boolean?         @default(true)
+  student           Student?         @relation(fields: [studentId], references: [id])
+  updatedAt         DateTime         @updatedAt
+  createdAt         DateTime         @default(now())
+  user              User             @relation(fields: [userId], references: [id])
+  instructor        Instructor?      @relation(fields: [instructorId], references: [id])
+  currency          Currency?        @relation(fields: [currencyCode], references: [code])
+  language          CourseLanguage?  @relation(fields: [languageCode], references: [id])
+  studentId         Int?             @unique
+  tutor             Tutor?           @relation(fields: [tutorId], references: [id])
+  tutorId           Int?             @unique
+  socialLinks       String?
+  editor            Editor?          @relation(fields: [editorId], references: [id])
+  editorId          Int?             @unique
+  customerService   CustomerService? @relation(fields: [customerServiceId], references: [id])
+  customerServiceId Int?             @unique
+  description       String?
+  dialCode          String?
+  phoneNumber       String?
+  timezone          String?
+  zipCode           String?
+  city              String?
+  state             String?
+  country           String?
+  file              File?            @relation(fields: [fileId], references: [id])
+  fileId            String?
+  languageCode      Int?
+  billing           Billing?
+}
+
+// Student profile
+model Student {
+  id                   Int                   @id @default(autoincrement())
+  parentFirstName      String?
+  parentLastName       String?
+  parentEmail          String?
+  parentDialCode       String?
+  parentPhoneNumber    String?
+  amountPurchased      String?
+  totalDiamond         Int                   @default(0)
+  learningLanguages    CourseLanguage[]      @relation("CourseLanguageToStudent")
+  classBookings        ClassBooking[]
+  updatedAt            DateTime              @updatedAt
+  createdAt            DateTime              @default(now())
+  profile              Profile?
+  languagesSpoken      CourseLanguage[]      @relation("CourseLanguageToStudentLanguagesSpoken")
+  reviews              Review[]
+  plans                Plan[]
+  courses              CourseStudent[]
+  classBookingRequests ClassBookingRequest[]
+  lessonProgresses     LessonProgress[]
+}
+
+// Instructor profile
+model Instructor {
+  id                    Int               @id @default(autoincrement())
+  title                 String?
+  bio                   String?
+  website               String?
+  countryCode           String?
+  experienceDesc        String?
+  qualificationDesc     String?
+  relatedMaterialDesc   String?
+  proficiencyLevelCode  String?
+  hourRate              Float?
+  amountPaid            String?
+  tags                  Tag[]
+  profile               Profile?
+  teachLanguages        CourseLanguage[]  @relation("CourseLanguageToInstructor")
+  languagesSpoken       CourseLanguage[]  @relation("CourseLanguageToInstructorLanguagesSpoken")
+  course                Course[]          @relation("InstructorToCourse")
+  coInstructorToCourses Course[]          @relation("CoInstructorToCourse")
+  updatedAt             DateTime          @updatedAt
+  createdAt             DateTime          @default(now())
+  country               Country?          @relation(fields: [countryCode], references: [code])
+  proficiencyLevel      ProficiencyLevel? @relation(fields: [proficiencyLevelCode], references: [code])
+  invitations           Invitation[]
+  plans                 Plan[]            @relation("OwnedPlanToInstructor")
+}
+
+// Tutor profile
+model Tutor {
+  id                   Int                   @id @default(autoincrement())
+  profileId            Int?
+  courses              Course[]
+  classBookings        ClassBooking[]
+  profile              Profile?
+  hourRate             Float?
+  amountPaid           String?
+  title                String?
+  bio                  String?
+  website              String?
+  countryCode          String?
+  experienceDesc       String?
+  qualificationDesc    String?
+  relatedMaterialDesc  String?
+  proficiencyLevelCode String?
+  tags                 Tag[]
+  teachLanguages       CourseLanguage[]      @relation("CourseLanguageToTutor")
+  languagesSpoken      CourseLanguage[]      @relation("CourseLanguageToTutorLanguagesSpoken")
+  country              Country?              @relation(fields: [countryCode], references: [code])
+  proficiencyLevel     ProficiencyLevel?     @relation(fields: [proficiencyLevelCode], references: [code])
+  updatedAt            DateTime              @updatedAt
+  createdAt            DateTime              @default(now())
+  tutoringPlan         TutoringPlan[]
+  reviews              Review[]
+  assignedPlans        Plan[]                @relation("AssignedPlanToTutor")
+  ownedPlans           Plan[]                @relation("OwnedPlanToTutor")
+  classBookingRequests ClassBookingRequest[]
+}
+
+// Editor profile
+model Editor {
+  id                       Int                     @id @default(autoincrement())
+  emailNotificationOptions EmailNotificationType[]
+  updatedAt                DateTime                @updatedAt
+  createdAt                DateTime                @default(now())
+  profile                  Profile?
+}
+
+// Customer service profile
+model CustomerService {
+  id                       Int                     @id @default(autoincrement())
+  emailNotificationOptions EmailNotificationType[]
+  updatedAt                DateTime                @updatedAt
+  createdAt                DateTime                @default(now())
+  profile                  Profile?
+}
+
+model AvailableTime {
+  id        Int       @id @default(autoincrement())
+  start     DateTime  @db.Timestamptz()
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  isDeleted Boolean   @default(false)
+  deletedAt DateTime?
+  user      User?     @relation(fields: [userId], references: [id])
+  repeat    Repeat?
+  userId    String?
+  room      Room?     @relation(fields: [roomId], references: [id])
+  roomId    String?
+}
+
+model Repeat {
+  id              Int           @id @default(autoincrement())
+  amount          Int?
+  dayOfWeeks      DayOfWeek[]
+  type            RepeatType
+  end             DateTime?     @db.Timestamptz()
+  dateExceptions  DateTime[]    @db.Timestamptz()
+  occurrence      Int?
+  availableTime   AvailableTime @relation(fields: [availableTimeId], references: [id])
+  availableTimeId Int           @unique
+  updatedAt       DateTime      @updatedAt
+  createdAt       DateTime      @default(now())
+  isDeleted       Boolean       @default(false)
+  deletedAt       DateTime?
+}
+
+model Course {
+  id                 Int              @id @default(autoincrement())
+  levelId            Int
+  instructorId       Int
+  courseLanguageId   Int
+  price              Int              @default(0)
+  strikePrice        Int              @default(0)
+  slug               String
+  userId             String
+  subdomainId        String?
+  thumbnailId        String?
+  instructionVideoId String?
+  title              String
+  description        String?
+  learningOutcome    String?
+  requirement        String?
+  courseType         CourseType?      @default(FREE)
+  isPublished        Boolean          @default(false)
+  isFree             Boolean          @default(false)
+  isDeleted          Boolean          @default(false)
+  isValid            Boolean          @default(false)
+  warnings           Json?
+  deletedAt          DateTime?
+  updatedAt          DateTime         @updatedAt
+  createdAt          DateTime         @default(now())
+  tags               Tag[]
+  tutors             Tutor[]
+  sections           CourseSection[]
+  coInstructors      Instructor[]     @relation("CoInstructorToCourse")
+  user               User             @relation(fields: [userId], references: [id])
+  level              Level            @relation(fields: [levelId], references: [id])
+  subdomain          Subdomain?       @relation(fields: [subdomainId], references: [id])
+  thumbnail          Thumbnail?       @relation(fields: [thumbnailId], references: [id])
+  language           CourseLanguage   @relation(fields: [courseLanguageId], references: [id])
+  instructionVideo   File?            @relation(fields: [instructionVideoId], references: [id])
+  instructor         Instructor       @relation("InstructorToCourse", fields: [instructorId], references: [id])
+  trackings          CourseTracking[]
+  invitations        Invitation[]
+  tutoringPlan       TutoringPlan[]
+  plans              Plan[]
+  students           CourseStudent[]
+}
+
+model CourseStudent {
+  courseId    Int
+  studentId   Int
+  userId      String
+  user        User       @relation(fields: [userId], references: [id])
+  course      Course     @relation(fields: [courseId], references: [id])
+  student     Student    @relation(fields: [studentId], references: [id])
+  updatedAt   DateTime   @updatedAt
+  createdAt   DateTime   @default(now())
+  purchased   Boolean    @default(false)
+  active      Boolean    @default(true)
+  subdomainId String?
+  subdomain   Subdomain? @relation(fields: [subdomainId], references: [id])
+
+  @@id([courseId, userId])
+}
+
+model CourseSection {
+  id        Int       @id @default(autoincrement())
+  index     Int       @default(0)
+  courseId  Int?
+  userId    String
+  title     String?
+  isDeleted Boolean   @default(false)
+  lessons   Lesson[]
+  deletedAt DateTime?
+  updatedAt DateTime  @updatedAt
+  createdAt DateTime  @default(now())
+  user      User      @relation(fields: [userId], references: [id])
+  course    Course?   @relation(fields: [courseId], references: [id])
+}
+
+model Lesson {
+  id                    Int                   @id @default(autoincrement())
+  classBookingId        Int?
+  courseSectionId       Int?
+  subdomainId           String?
+  thumbnailId           String?
+  instructionVideoId    String?
+  showIntroductionVideo Boolean               @default(true)
+  showDialogSlide       Boolean               @default(true)
+  index                 Int                   @default(0)
+  title                 String
+  userId                String
+  context               String?
+  introduction          String?
+  phrases               Phrase[]
+  vocabularies          Vocabulary[]
+  grammaries            Grammar[]
+  dialogs               Dialog[]
+  isFree                Boolean               @default(false)
+  isDeleted             Boolean               @default(false)
+  deletedAt             DateTime?
+  createdAt             DateTime              @default(now())
+  updatedAt             DateTime              @updatedAt
+  user                  User                  @relation(fields: [userId], references: [id])
+  subdomain             Subdomain?            @relation(fields: [subdomainId], references: [id])
+  thumbnail             Thumbnail?            @relation(fields: [thumbnailId], references: [id])
+  classBooking          ClassBooking?         @relation(fields: [classBookingId], references: [id])
+  section               CourseSection?        @relation(fields: [courseSectionId], references: [id])
+  instructionVideo      File?                 @relation(fields: [instructionVideoId], references: [id])
+  drills                Drill[]
+  courseTrackings       CourseTracking[]
+  tutoringMaterials     TutoringMaterial[]
+  progresses            LessonProgress[]
+  classLessonsComplete  ClassLessonComplete[]
+}
+
+model CourseTracking {
+  id          String   @id @default(cuid())
+  lessonId    Int
+  courseId    Int
+  indexStep   Int
+  userId      String
+  isCompleted Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  lesson      Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lessonId, indexStep])
+}
+
+model Vocabulary {
+  id          String   @id @default(cuid())
+  lessonId    Int?
+  index       Int      @default(0)
+  value       String?
+  explanation String?
+  medias      File[]
+  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now())
+  lesson      Lesson?  @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+}
+
+model Phrase {
+  id          String   @id @default(cuid())
+  lessonId    Int?
+  index       Int      @default(0)
+  value       String?
+  explanation String?
+  medias      File[]
+  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now())
+  lesson      Lesson?  @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+}
+
+model Grammar {
+  id          String   @id @default(cuid())
+  lessonId    Int?
+  index       Int      @default(0)
+  value       String?
+  explanation String?
+  medias      File[]
+  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now())
+  lesson      Lesson?  @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+}
+
+model Drill {
+  id               String           @id @default(cuid())
+  index            Int              @default(0)
+  instruction      String
+  parentId         String?
+  data             DrillItem[]
+  type             DrillType
+  sectionType      SectionType
+  lesson           Lesson           @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  lessonId         Int
+  plan             Plan?            @relation(fields: [planId], references: [id])
+  planId           String?
+  lessonProgresses LessonProgress[]
+}
+
+model LessonProgress {
+  id             String   @id @default(cuid())
+  lessonId       Int
+  drillId        String
+  index          Int      @default(0)
+  studentId      Int
+  currentHealth  Int      @default(0)
+  currentDiamond Int      @default(100)
+  isCorrect      Boolean
+  updatedAt      DateTime @updatedAt
+  createdAt      DateTime @default(now())
+
+  drill   Drill   @relation(fields: [drillId], references: [id])
+  lesson  Lesson  @relation(fields: [lessonId], references: [id])
+  student Student @relation(fields: [studentId], references: [id])
+
+  @@unique([drillId, index])
+}
+
+model DrillItem {
+  id           String   @id @default(cuid())
+  drillId      String
+  mediaId      String?
+  mediaUrl     String?
+  index        Int      @default(0)
+  data         String[] //index 0 is always a question
+  correctIndex Int
+  media        File?    @relation(fields: [mediaId], references: [id])
+  drill        Drill    @relation(fields: [drillId], references: [id], onDelete: Cascade)
+}
+
+model Dialog {
+  id             Int          @id @default(autoincrement())
+  lessonId       Int
+  thumbnailId    String?
+  index          Int          @default(0)
+  context        String?
+  contextAudioId String?
+  introduction   String?
+  medias         File[]
+  lines          DialogLine[]
+  updatedAt      DateTime     @updatedAt
+  createdAt      DateTime     @default(now())
+  lesson         Lesson       @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  thumbnail      Thumbnail?   @relation(fields: [thumbnailId], references: [id])
+}
+
+model DialogLine {
+  id           Int              @id @default(autoincrement())
+  index        Int              @default(0)
+  dialogId     Int?
+  characterId  Int?
+  content      String?
+  medias       File[]
+  updatedAt    DateTime         @updatedAt
+  createdAt    DateTime         @default(now())
+  dialog       Dialog?          @relation(fields: [dialogId], references: [id], onDelete: Cascade)
+  character    DialogCharacter? @relation(fields: [characterId], references: [id])
+  dialogAIData DialogAIData?
+  voiceRecords VoiceRecord[]
+}
+
+model DialogCharacter {
+  id          Int          @id @default(autoincrement())
+  subdomainId String?
+  age         Int?
+  name        String
+  occupation  String?
+  gender      Gender?
+  line        DialogLine[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  subdomain   Subdomain?   @relation(fields: [subdomainId], references: [id])
+}
+
+model DialogAIData {
+  id                 String     @id @default(cuid())
+  alternativeAnswers String[]
+  dialogLine         DialogLine @relation(fields: [dialogLineId], references: [id])
+  dialogLineId       Int        @unique
+  subdomain          Subdomain  @relation(fields: [subdomainId], references: [id])
+  subdomainId        String
+}
+
+model Level {
+  id          Int        @id @default(autoincrement())
+  userId      String?
+  subdomainId String?
+  name        String     @unique
+  isDeleted   Boolean    @default(false)
+  courses     Course[]
+  deletedAt   DateTime?
+  updatedAt   DateTime   @updatedAt
+  createdAt   DateTime   @default(now())
+  user        User?      @relation(fields: [userId], references: [id])
+  subdomain   Subdomain? @relation(fields: [subdomainId], references: [id])
+}
+
+model CourseLanguage {
+  id                        Int          @id @default(autoincrement())
+  name                      String
+  code                      String?      @unique
+  isDeleted                 Boolean      @default(false)
+  isApproved                Boolean      @default(false)
+  courses                   Course[]
+  deletedAt                 DateTime?
+  updatedAt                 DateTime     @updatedAt
+  createdAt                 DateTime     @default(now())
+  plans                     Plan[]
+  subdomains                Subdomain[]
+  profiles                  Profile[]
+  studentLanguagesSpoken    Student[]    @relation("CourseLanguageToStudentLanguagesSpoken")
+  studentLearningLanguages  Student[]    @relation("CourseLanguageToStudent")
+  instructorTeachLanguages  Instructor[] @relation("CourseLanguageToInstructor")
+  instructorLanguagesSpoken Instructor[] @relation("CourseLanguageToInstructorLanguagesSpoken")
+  tutorTeachLanguages       Tutor[]      @relation("CourseLanguageToTutor")
+  tutorLanguagesSpoken      Tutor[]      @relation("CourseLanguageToTutorLanguagesSpoken")
+}
+
+model Tag {
+  id          Int          @id @default(autoincrement())
+  subdomainId String?
+  name        String
+  userId      String?
+  description String?
+  hexColor    String?
+  isDeleted   Boolean      @default(false)
+  deletedAt   DateTime?
+  updatedAt   DateTime     @updatedAt
+  createdAt   DateTime     @default(now())
+  courses     Course[]
+  instructors Instructor[]
+  user        User?        @relation(fields: [userId], references: [id])
+  tutors      Tutor[]
+  subdomain   Subdomain?   @relation(fields: [subdomainId], references: [id])
+
+  @@unique([subdomainId, name])
+}
+
+model MagicToken {
+  id        Int      @id @default(autoincrement())
+  token     String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  expiredAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  refId     String?
+  userId    String
+  title     String?
+  body      String?
+  metadata  Json?
+  seen      Boolean          @default(false)
+  disabled  Boolean          @default(false)
+  type      NotificationType @default(OTHER)
+  updatedAt DateTime         @updatedAt
+  createdAt DateTime         @default(now())
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model NotificationToken {
+  userId    String
+  deviceId  String
+  token     String
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, deviceId])
+}
+
+model File {
+  id                String             @id @default(cuid())
+  ext               String?
+  name              String
+  token             String?
+  s3Key             String?
+  userId            String
+  folderId          String?
+  s3Location        String?
+  externalLink      String?
+  size              Float?
+  metadata          Json?
+  public            Boolean            @default(true)
+  thumbnail         Thumbnail?
+  type              FileType           @default(OTHER)
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  lessons           Lesson[]
+  courses           Course[]
+  phrases           Phrase[]
+  dialogs           Dialog[]
+  grammars          Grammar[]
+  profiles          Profile[]
+  dialogLines       DialogLine[]
+  vocabularies      Vocabulary[]
+  user              User               @relation(fields: [userId], references: [id])
+  folder            Folder?            @relation(name: "FileToFolder", fields: [folderId], references: [id], onDelete: Cascade)
+  drillItem         DrillItem[]
+  tutoringMaterials TutoringMaterial[]
+  voiceRecords      VoiceRecord[]
+  blogs             Blog[]
+  banners           Banner[]
+}
+
+model Thumbnail {
+  id           String   @id @default(cuid())
+  s3Key        String
+  userId       String
+  fileId       String   @unique
+  s3Location   String
+  externalLink String?
+  public       Boolean  @default(true)
+  updatedAt    DateTime @updatedAt
+  createdAt    DateTime @default(now())
+  courses      Course[]
+  dialogs      Dialog[]
+  lessons      Lesson[]
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  file         File     @relation(fields: [fileId], references: [id], onDelete: Cascade)
+}
+
+model Folder {
+  id             String   @id @default(cuid())
+  parentFolderId String?
+  name           String
+  userId         String
+  public         Boolean  @default(true)
+  updatedAt      DateTime @updatedAt
+  createdAt      DateTime @default(now())
+  folders        Folder[] @relation("FolderToFolder")
+  files          File[]   @relation(name: "FileToFolder")
+  user           User     @relation(fields: [userId], references: [id])
+  fixed          Boolean  @default(false)
+  parentFolder   Folder?  @relation(name: "FolderToFolder", fields: [parentFolderId], references: [id])
+}
+
+model ClassBooking {
+  id                    Int                   @id @default(autoincrement())
+  referenceId           String?               @unique
+  bookingId             String                @unique
+  confirmation          BookingConfirmation   @default(PENDING)
+  lessons               Lesson[]
+  classBookingNote      ClassBookingNote[]
+  plan                  Plan                  @relation(fields: [planId], references: [id])
+  planId                String
+  status                BookingStatus         @default(PENDING)
+  updatedAt             DateTime              @updatedAt
+  createdAt             DateTime              @default(now())
+  tutor                 Tutor?                @relation(fields: [tutorId], references: [id])
+  students              Student[]
+  startTime             DateTime
+  finishTime            DateTime
+  timezoneAbbr          String
+  virtualClassLink      String?
+  tutorChargeRateHour   Float?
+  studentChargeRateHour Float?
+  isPublic              Boolean
+  isRepeat              Boolean               @default(false)
+  maxStudents           Int?
+  campus                Campus?               @relation(fields: [campusId], references: [id])
+  campusId              String?
+  room                  Room?                 @relation(fields: [roomId], references: [id])
+  roomId                String?
+  topic                 String?
+  studentPremiumAmount  Int?
+  availableTimeId       Int?
+  repeatType            RepeatType?
+  repeatData            Int?
+  repeatUntilDate       DateTime?
+  classBookingRequests  ClassBookingRequest[]
+  createdBy             User?                 @relation(fields: [createdByUserId], references: [id])
+  createdByUserId       String?
+  tutorId               Int?
+  classSessionReport    ClassSessionReport?
+  classLessonsComplete  ClassLessonComplete[]
+}
+
+model ClassBookingNote {
+  id             Int          @id @default(autoincrement())
+  classBookingId Int
+  content        String
+  updatedAt      DateTime     @updatedAt
+  createdAt      DateTime     @default(now())
+  classBooking   ClassBooking @relation(fields: [classBookingId], references: [id])
+}
+
+model ClassBookingRequest {
+  id             Int                 @id @default(autoincrement())
+  student        Student             @relation(fields: [studentId], references: [id])
+  studentId      Int
+  classBooking   ClassBooking        @relation(fields: [classBookingId], references: [id])
+  classBookingId Int
+  tutor          Tutor               @relation(fields: [tutorId], references: [id])
+  tutorId        Int
+  status         BookingConfirmation @default(PENDING)
+  trialSession   DateTime
+  name           String
+  email          String?
+  phoneNumber    String?
+  aboutStudent   String?
+}
+
+model ClassSessionReport {
+  id             String       @id @default(cuid())
+  classBookingId Int          @unique
+  classBooking   ClassBooking @relation(fields: [classBookingId], references: [id])
+  creditCost     Int
+  startTime      DateTime
+  finishTime     DateTime
+  subdomainId    String?
+  subdomain      Subdomain?   @relation(fields: [subdomainId], references: [id])
+}
+
+model ClassLessonComplete {
+  id             String       @id @default(cuid())
+  status         Boolean      @default(true)
+  classBooking   ClassBooking @relation(fields: [classBookingId], references: [id])
+  classBookingId Int
+  lesson         Lesson       @relation(fields: [lessonId], references: [id])
+  lessonId       Int
+  user           User         @relation(fields: [userId], references: [id])
+  userId         String
+  updatedAt      DateTime     @updatedAt
+  createdAt      DateTime     @default(now())
+}
+
+model Plan {
+  id                String             @id @default(cuid())
+  title             String
+  language          CourseLanguage     @relation(fields: [courseLanguageId], references: [id])
+  course            Course             @relation(fields: [courseId], references: [id])
+  calendarColour    String?
+  description       String?
+  status            PlanStatus         @default(PRIVATE)
+  tutoringMaterials TutoringMaterial[]
+  drills            Drill[]
+  students          Student[]
+  tutors            Tutor[]            @relation("AssignedPlanToTutor")
+  ownerInstructor   Instructor?        @relation("OwnedPlanToInstructor", fields: [instructorId], references: [id])
+  ownerTutor        Tutor?             @relation("OwnedPlanToTutor", fields: [tutorId], references: [id])
+  courseLanguageId  Int
+  courseId          Int
+  isDeleted         Boolean            @default(false)
+  deletedAt         DateTime?
+  updatedAt         DateTime           @updatedAt
+  createdAt         DateTime           @default(now())
+  subdomain         Subdomain          @relation(fields: [subdomainId], references: [id])
+  subdomainId       String
+  instructorId      Int?
+  tutorId           Int?
+  classBookings     ClassBooking[]
+  classTags         ClassTag[]
+}
+
+//Student subscription
+model Subscription {
+  id              String             @id @default(cuid())
+  userId          String?
+  planId          String?
+  subdomainId     String
+  referenceId     String?            @unique
+  status          SubscriptionStatus
+  method          PaymentMethod?     @default(OTHER)
+  trialEndAt      DateTime?
+  endAt           DateTime
+  nextBillingTime DateTime?
+  updatedAt       DateTime           @updatedAt
+  createdAt       DateTime           @default(now())
+  subdomain       Subdomain          @relation(fields: [subdomainId], references: [id])
+  user            User?              @relation(fields: [userId], references: [id])
+  plan            SubscriptionPlan?  @relation(fields: [planId], references: [id])
+  invoices        Invoice[]
+}
+
+//Student subscription plan
+model SubscriptionPlan {
+  id              String                    @id @default(cuid())
+  paypalId        String?
+  stripeProductId String?
+  title           String?
+  description     String?
+  cost            Float                     @default(0)
+  currency        String                    @default("USD")
+  term            Int                       @default(30)
+  features        SubscriptionPlanFeature[]
+  trial           Boolean                   @default(false)
+  isActive        Boolean                   @default(false)
+  isPreferred     Boolean                   @default(false)
+  subscriptions   Subscription[]
+  isDeleted       Boolean                   @default(false)
+  deletedAt       DateTime?
+  updatedAt       DateTime                  @updatedAt
+  createdAt       DateTime                  @default(now())
+  subdomain       Subdomain?                @relation(fields: [subdomainId], references: [id])
+  subdomainId     String?
+  coupons         Coupon[]
+  billings        Billing[]
+}
+
+model RoleManagement {
+  id          String    @id @default(cuid())
+  name        String
+  role        Role
+  value       String
+  subdomain   Subdomain @relation(fields: [subdomainId], references: [id])
+  subdomainId String
+}
+
+model OnlinePaymentGateWay {
+  id          String             @id @default(cuid())
+  subdomainId String?
+  type        PaymentGatewayType
+  isActivated Boolean            @default(false)
+  clientId    String?
+  secretKey   String?
+  updatedAt   DateTime           @updatedAt
+  subdomain   Subdomain?         @relation(fields: [subdomainId], references: [id])
+
+  @@unique([subdomainId, type])
+}
+
+model OfflinePaymentGateway {
+  id           String     @id @default(cuid())
+  subdomainId  String?
+  isActivated  Boolean    @default(false)
+  name         String
+  description  String?
+  instruction  String?
+  serialNumber String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  subdomain    Subdomain? @relation(fields: [subdomainId], references: [id])
+}
+
+model SubdomainSocialLink {
+  id          String    @id @default(cuid())
+  order       Int?
+  icon        String?
+  url         String?
+  subdomain   Subdomain @relation(fields: [subdomainId], references: [id])
+  subdomainId String
+}
+
+model TutoringPlan {
+  id        String  @id @default(cuid())
+  course    Course  @relation(fields: [courseId], references: [id])
+  courseId  Int
+  tutor     Tutor   @relation(fields: [tutorId], references: [id])
+  tutorId   Int
+  isEnabled Boolean @default(true)
+  isShared  Boolean @default(false)
+}
+
+model TutoringMaterial {
+  id                  String  @id @default(cuid())
+  lesson              Lesson  @relation(fields: [lessonId], references: [id])
+  lessonId            Int
+  title               String
+  description         String
+  file                File    @relation(fields: [fileId], references: [id])
+  fileId              String
+  shareWithStudent    Boolean
+  shareWithInstructor Boolean
+  plan                Plan?   @relation(fields: [planId], references: [id])
+  planId              String?
+}
+
+model VoiceRecord {
+  id           String          @id @default(cuid())
+  type         VoiceRecordType
+  user         User            @relation(fields: [userId], references: [id])
+  userId       String
+  sendToUserId String
+  file         File            @relation(fields: [fileId], references: [id])
+  fileId       String
+  feedback     String?
+  dialogLines  DialogLine?     @relation(fields: [dialogLineId], references: [id])
+  dialogLineId Int?
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  studentId Int
+  tutorId   Int
+  rate      Int
+  hours     Int
+  details   String
+  createdAt DateTime @default(now())
+  isDeleted Boolean  @default(false)
+
+  student Student @relation(fields: [studentId], references: [id])
+  tutor   Tutor   @relation(fields: [tutorId], references: [id])
+}
+
+model Campus {
+  id          String       @id @default(cuid())
+  subdomainId String
+  name        String
+  countryCode String?
+  dialCode    String?
+  phoneNumber String?
+  managerName String?
+  address     String
+  zipCode     String?
+  city        String?
+  state       String?
+  status      CampusStatus @default(ACTIVE)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt()
+  isDeleted   Boolean      @default(false)
+  rooms       Room[]
+
+  country      Country?       @relation(fields: [countryCode], references: [code])
+  subdomain    Subdomain      @relation(fields: [subdomainId], references: [id])
+  classBooking ClassBooking[]
+}
+
+model Room {
+  id             String          @id @default(cuid())
+  roomId         String //Room manager can input this Id. Ex: R01, R02
+  availableTimes AvailableTime[]
+  campusId       String?
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt()
+  campus         Campus?         @relation(fields: [campusId], references: [id])
+  classBookings  ClassBooking[]
+}
+
+model BlogCategory {
+  id          String    @id @default(cuid())
+  subdomainId String
+  name        String
+  active      Boolean   @default(true)
+  isDeleted   Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt()
+  blogs       Blog[]
+  subdomain   Subdomain @relation(fields: [subdomainId], references: [id])
+}
+
+model Blog {
+  id              String   @id @default(cuid())
+  subdomainId     String
+  categoryId      String
+  title           String
+  author          String
+  content         String
+  metaKeywords    String[]
+  metaDescription String
+  isPublished     Boolean  @default(false)
+  isDeleted       Boolean  @default(false)
+  files           File[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt()
+
+  category  BlogCategory @relation(fields: [categoryId], references: [id])
+  subdomain Subdomain    @relation(fields: [subdomainId], references: [id])
+}
+
+model FAQCategory {
+  id          String   @id @default(cuid())
+  subdomainId String
+  name        String
+  active      Boolean  @default(true)
+  isDeleted   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt()
+
+  faqs      FAQ[]
+  subdomain Subdomain @relation(fields: [subdomainId], references: [id])
+}
+
+model FAQ {
+  id          String   @id @default(cuid())
+  subdomainId String
+  categoryId  String
+  question    String
+  answer      String
+  isDeleted   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt()
+
+  category  FAQCategory @relation(fields: [categoryId], references: [id])
+  subdomain Subdomain   @relation(fields: [subdomainId], references: [id])
+}
+
+model Banner {
+  id           String   @id @default(cuid())
+  subdomainId  String
+  fileId       String?
+  text         String?
+  url          String?
+  textPosition String   @default("Right")
+  fontSize     Int      @default(35)
+  textColor    String   @default("#000")
+  order        Int      @default(0)
+  delay        Int      @default(1000)
+  isDeleted    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt()
+
+  file      File?     @relation(fields: [fileId], references: [id])
+  subdomain Subdomain @relation(fields: [subdomainId], references: [id])
+}
+
+model ClassTag {
+  id          String     @id @default(cuid())
+  name        String
+  description String
+  users       User[]
+  plans       Plan[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt()
+  subdomain   Subdomain? @relation(fields: [subdomainId], references: [id])
+  subdomainId String?
+}
+
+model EmailTemplate {
+  id          Int               @id @default(autoincrement())
+  type        EmailTemplateType
+  subject     String
+  content     String
+  subdomain   Subdomain?        @relation(fields: [subdomainId], references: [id])
+  subdomainId String?
+}
+
+model EmailSMTPLog {
+  id          Int                @id @default(autoincrement())
+  messageId   String?
+  type        EmailTemplateType?
+  from        String?
+  to          String
+  createdAt   DateTime           @default(now())
+  subject     String
+  body        String
+  error       String?
+  subdomainId String
+}
+
+enum SubscriptionPlanFeature {
+  ALL_COURSES
+  MY_RECORDINGS
+  IMMY_CHAT_BOT
+  TUTOR_MATCH
+}
+
+enum CourseType {
+  FREE
+  PAID
+  WITH_SUBSCRIPTION
+}
+
+enum CouponType {
+  PERCENT
+  AMOUNT
+}
+
+enum CampusStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum PaymentGatewayType {
+  PAYPAL
+  STRIPE
+  VNPAY
+}
+
+enum PaymentMethod {
+  OTHER
+  PAYPAL
+  VNPAY
+  STRIPE
+  IMMERSIO_CREDIT
+}
+
+enum SubscriptionStatus {
+  PENDING
+  CREATED
+  ACTIVATED
+  CANCELLED
+  EXPIRED
+  DELETED
+  PAYMENT_FAILED
+}
+
+model Log {
+  id        String   @id @default(cuid())
+  method    String?
+  code      Int?
+  url       String?
+  userId    String?
+  body      String?
+  message   String?
+  payload   String?
+  agent     String?
+  createdAt DateTime @default(now())
+}
+
+enum Role {
+  SUPER_ADMIN
+  SUBDOMAIN_ADMIN
+  INSTRUCTOR
+  TUTOR
+  STUDENT
+  EDITOR
+  CUSTOMER_SERVICE
+}
+
+enum SocialMediaType {
+  GOOGLE
+  FACEBOOK
+}
+
+enum DayOfWeek {
+  MON
+  TUE
+  WED
+  THU
+  FRI
+  SAT
+  SUN
+}
+
+enum NotificationType {
+  INVITE_AS_COINSTRUCTOR
+  INVITE_AS_TUTOR
+  OTHER
+  INVITE_INTERVIEW
+  SUBMIT_BOOKING_REQUEST
+}
+
+enum FileType {
+  VIDEO
+  AUDIO
+  IMAGE
+  PDF
+  DOCUMENTATION
+  PRESENTATION
+  SHEET
+  OTHER
+  AVATAR
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum BookingConfirmation {
+  PENDING
+  REJECTED
+  CONFIRMED
+}
+
+enum DrillType {
+  FLASH_CARD
+  DRAG_AND_DROP
+  DRAG_THE_WORDS
+  MULTIPLE_CHOICES
+  SORT_THE_PARAGRAPH
+  LISTEN_AND_FILL_BLANKS
+}
+
+enum SectionType {
+  VOCABULARY
+  PHRASE
+  GRAMMAR
+  TUTOR_PLAN
+}
+
+enum BookingStatus {
+  PENDING
+  PAID
+  COMPLETED
+  REFUNDED
+}
+
+enum VoiceRecordType {
+  SUBMIT
+  FEEDBACK
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  PENDING
+  APPROVED
+  REJECTED
+  DORMANT
+}
+
+enum RootSettingKey {
+  DAYS_BEFORE_EXPIRATION_REMINDER
+  SUBDOMAIN_PLAN_MINIMUM_MONTHLY_FEE
+}
+
+enum EmailNotificationType {
+  SUBSCRIPTION_UPDATE
+  BOOKING_ENQUIRY
+  STUDENT_AUTO_CHARGE
+  PAYMENT_ORDER_PAYOUT_LATE_FAILURE
+  INSTRUCTOR_DATA_DELETION_REQUEST
+  WEEKLY_UPDATE
+}
+
+enum PlanStatus {
+  PUBLISH
+  PRIVATE
+}
+
+enum RepeatType {
+  DAY
+  WEEK
+  MONTH
+}
+
+enum EmailSMTPSecure {
+  None
+  SSL
+  TSL
+}
+
+enum EmailTemplateType {
+  VERIFY_EMAIL
+  RESET_PASSWORD
+  SUBSCRIPTION_CONFIRMATION
+  WELCOME
+  ACCOUNT_DEACTIVATION
+  CANCELLATION
+  REVIEW_REQUEST
+  PAYMENT_REQUEST
+  PAYMENT_CONFIRMATION
+  SUBCRIPTION_RENEWAL_REMINDER
+  REPORT_REQUEST
+}
+
+enum SubdomainPlanStatus {
+  ACTIVE
+  INACTIVE
+}
+
+model Billing {
+  id                 String             @id @default(cuid())
+  profileId          Int                @unique
+  subscriptionPlanId String?
+  firstName          String
+  lastName           String
+  email              String
+  phoneNumber        String?
+  companyName        String?
+  streetAddress      String?
+  city               String
+  state              String
+  country            String?
+  coupon             String?
+  paymentMethod      PaymentGatewayType
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+  stripeId           String?
+  paypalId           String?
+  latestInvoiceId    String?
+  profile            Profile            @relation(fields: [profileId], references: [id])
+  subscriptionPlan   SubscriptionPlan?  @relation(fields: [subscriptionPlanId], references: [id])
+}
+
+//PAYMENT
+model SubdomainBilling {
+  id              String             @id @default(cuid())
+  subdomainId     String             @unique
+  subdomainPlanId String?
+  firstName       String
+  lastName        String
+  email           String
+  phoneNumber     String?
+  companyName     String?
+  streetAddress   String?
+  city            String
+  state           String
+  country         String?
+  coupon          String?
+  paymentMethod   PaymentGatewayType
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  stripeId        String?
+  paypalId        String?
+  latestInvoiceId String?
+  subdomain       Subdomain          @relation(fields: [subdomainId], references: [id])
+  subdomainPlan   SubdomainPlan?     @relation(fields: [subdomainPlanId], references: [id])
+}
+
+model SubdomainPlan {
+  id                    String                 @id @default(cuid())
+  stripeProductId       String?
+  stripeStudentPriceId  String?
+  stripeStoragePriceId  String?
+  subdomainId           String?
+  key                   String                 @unique @default(cuid())
+  type                  SubdomainPlanType      @default(FLAT_RATE)
+  subdomainBillings     SubdomainBilling[]
+  status                SubdomainPlanStatus    @default(ACTIVE)
+  daysTrial             Int                    @default(30)
+  currency              CurrencyOption         @default(USD)
+  features              SubdomainPlanFeature[]
+  minimumCharge         Int                    @default(0)
+  sampleLessons         Int                    @default(0)
+  studentProratedPrices StudentProratedPrice[]
+  storageProratedPrices StorageProratedPrice[]
+  invoices              Invoice[]
+  coupons               Coupon[]
+  contractLength        Int?
+  customDomain          String?
+  description           String?
+  autoRenewal           Boolean                @default(false)
+  startAt               DateTime?
+  updatedAt             DateTime?              @updatedAt
+  createdAt             DateTime               @default(now())
+}
+
+model StudentProratedPrice {
+  id              String        @id @default(cuid())
+  subdomainPlanId String
+  price           Float         @default(0)
+  studentMinimum  Int           @default(0)
+  subdomainPlan   SubdomainPlan @relation(fields: [subdomainPlanId], references: [id], onDelete: Cascade)
+
+  @@unique([subdomainPlanId, studentMinimum])
+}
+
+model StorageProratedPrice {
+  id              String        @id @default(cuid())
+  subdomainPlanId String
+  price           Float         @default(0)
+  storageMinimum  Int           @default(0)
+  subdomainPlan   SubdomainPlan @relation(fields: [subdomainPlanId], references: [id], onDelete: Cascade)
+
+  @@unique([subdomainPlanId, storageMinimum])
+}
+
+model Coupon {
+  id                String             @id @default(cuid())
+  stripeId          String?
+  paypalId          String?
+  subdomainId       String?
+  name              String
+  code              String
+  type              CouponType
+  value             Float
+  currency          CurrencyOption?
+  startAt           DateTime
+  endAt             DateTime
+  subscriptionPlans SubscriptionPlan[]
+  subdomainPlans    SubdomainPlan[]
+  limit             Int                @default(0)
+  usedBy            CouponUsedBy[]
+  totalUsed         Int                @default(0)
+  isDeleted         Boolean            @default(false)
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt()
+
+  subdomain Subdomain? @relation(fields: [subdomainId], references: [id])
+
+  @@unique([subdomainId, code])
+}
+
+model CouponUsedBy {
+  id          String  @id @default(cuid())
+  couponId    String?
+  subdomainId String?
+  userId      String?
+
+  coupon Coupon? @relation(fields: [couponId], references: [id])
+}
+
+model Invoice {
+  id              String        @id @default(cuid())
+  refId           String        @unique //Id get from stripe, paypal, vnpay...
+  numberInMonth   Int?
+  subdomainId     String?
+  subscriptionId  String?
+  method          PaymentMethod
+  subdomainPlanId String?
+  amount          Float
+  currency        String
+  status          InvoiceStatus @default(PENDING)
+  paidAt          DateTime?
+  downloadUrl     String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  subdomainPlan SubdomainPlan? @relation(fields: [subdomainPlanId], references: [id])
+  subdomain     Subdomain?     @relation(fields: [subdomainId], references: [id])
+
+  transaction   Transaction?  @relation(fields: [transactionId], references: [id])
+  subscription  Subscription? @relation(fields: [subscriptionId], references: [id])
+  transactionId String?       @unique
+}
+
+model Transaction {
+  id          String              @id @default(cuid())
+  subdomainId String?
+  userId      String?
+  refId       String?
+  type        TransactionType     @default(PAYMENT)
+  amount      Float
+  currency    CurrencyOption      @default(USD)
+  status      TransactionStatus   @default(PENDING)
+  paymentType PaymentGatewayType?
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  user      User?      @relation(fields: [userId], references: [id])
+  subdomain Subdomain? @relation(fields: [subdomainId], references: [id])
+  invoice   Invoice?
+}
+
+enum SubdomainPlanFeature {
+  TUTOR_MATCH
+  MY_RECORDINGS
+  IMMY_CHAT_BOT
+  SAMPLE_LESSON
+  EMAIL_SUPPORT
+  SUBDOMAIN
+  CUSTOM_DOMAIN
+  STORAGE_LIMIT
+  AI_LIBRARY
+  PRIORITY_SUPPORT
+}
+
+enum InvoiceStatus {
+  PENDING
+  PAID
+  OVER_DUE
+}
+
+enum TransactionStatus {
+  PENDING
+  SUCCESS
+  FAILED
+}
+
+enum TransactionType {
+  PAYMENT
+  CHARGE
+  DISCOUNT
+  REFUND
+}
+
+enum SubdomainPlanType {
+  PAY_AS_YOU_GO
+  FLAT_RATE
+}
+
+enum CurrencyOption {
+  VND
+  USD
+  GBP
+  CAD
+  EUR
+}

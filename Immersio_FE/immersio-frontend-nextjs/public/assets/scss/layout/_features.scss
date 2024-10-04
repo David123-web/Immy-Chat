@@ -1,0 +1,105 @@
+@use '../utils' as *;
+
+/*----------------------------------------*/
+/*  05. FEATURES CSS START
+/*----------------------------------------*/
+.algin-self-center {
+    align-self: center;
+}
+
+.immersio-root-content {
+    @media #{$laptopScreen} {
+        .pl-lg-50 {
+            padding-left: 50px;
+        }
+    }
+}
+
+.feature {
+    &-wrapper {
+        padding-top: 60px;
+
+        @media #{$xs} {
+            padding-top: 44px;
+        }
+    }
+    &-tabs {   
+        @media #{$laptopScreen} {
+            background-color: var(--tp-new_theme-6);
+            margin: 0px -40px;
+        }
+
+        .ant-tabs-nav {
+            margin-bottom: 0;
+        }
+
+        .ant-tabs-ink-bar {
+            background-color: var(--tp-new_theme-3);
+            height: 3px;
+        }
+
+        .ant-tabs-tab {
+            font: normal normal normal 16px/50px Roboto;
+            color: var(--tp-new_theme-1);
+            padding: 8px 0;
+            min-width: 250px;
+            justify-content: center;
+
+            @media #{$xs} {
+                max-width: 100px;
+                min-width: unset;
+            }
+
+            &.ant-tabs-tab-active {
+                font: normal normal bold 16px/50px Roboto;
+
+                .ant-tabs-tab-btn {
+                    color: var(--tp-new_theme-1);
+                }
+            }
+        }
+    }
+
+    &__content {
+
+        h3 {
+            font: normal normal bold 28px/40px Roboto;
+            margin-bottom: 30px;
+        }
+
+        ul {
+            padding-left: 50px;
+            list-style: none;
+            margin-bottom: 50px;
+
+            li {
+                position: relative;
+                font: normal normal normal 18px/26px Roboto;
+                margin-bottom: 20px;
+
+                &:before {
+                    content: "";
+                    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAYAAAByUDbMAAAAAXNSR0IArs4c6QAAAcRJREFUOBGVVEtSwkAQ7Q6fLbmBuDDljhwBTyAuhHKHC6hypTcwnMIqtIpyZcHGeAI5QtwpLsQb4DYk1XYPTBgSCDCbmel+/fJm5nUQNozTl4cqFQrnANggABcBbJ5nPAcA5GMcv31e3UzTpZxfjerrwC5H0S0SeKvo5hUheJPLTs/MJmSKaD5/R0DXBOStCSgIS6Wz6cX1THCWBpfD+fgQIqkTfJkFiBDZKzJn+OghYk0Chw5FGEZ3UoeLyy7+HEjyy/gjswbj6NiiYrFhBnetieD5q9mpEtGHiRUeC4j2JhOiSavTPhn125lrYR5LfGR+YdvaJLIAB2kcAdYsvsBKJkHQ42f/03FN5Ayf+ChZIsGxx2xWtipaFo/5KB4rrktOE/HRXEDKKEo+yFhWJi2yNurOqD/4bnYDK47d5R1xSyEbGuw1pLERHlaNvhFTSy5sC6H0nyjaRbQoQj/XZ9IuTLTXAymfydf5XnppdbLfl0jqhYePuhjOsB9kvKOTObOYd9LqKvVJo4flUj3t6hwOlRK81GlcokwC6jfETYsI9xqwbZajiYXM/BqZTqjml57lFmG/yWtWxHMMDuT1MYr8TX/af44AyKSWyw9qAAAAAElFTkSuQmCC) no-repeat;
+                    background-size: 100%;
+                    position: absolute;
+                    top: 4px;
+                    left: -43px;
+                    width: 19px;
+                    height: 19px;
+                }
+            }
+        }
+    }
+
+    &__image {
+        img {
+            width: 100%;
+            height: auto;
+
+            @media #{$laptopScreen} {
+                width: inherit;
+                height: inherit;
+            }
+        }
+    }
+}

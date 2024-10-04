@@ -1,0 +1,283 @@
+.step {
+  text-align: center;
+  height: 660px;
+}
+.stepTabs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.stepTabs .stepTabItem {
+  width: 8px;
+  height: 8px;
+  margin: 0 5px;
+ /* UI Properties */
+  background: #c0c0c4 0% 0% no-repeat padding-box;
+  border-radius: 4px;
+}
+.stepTabs .stepTabItem.active {
+  width: 34px;
+  background: var(--tp-new_theme-4) 0% 0% no-repeat padding-box;
+}
+.stepCards {
+  margin-top: 13px;
+  position: relative;
+  height: 360px;
+  display: inline-block;
+}
+.stepCardOverlay {
+  position: absolute;
+  z-index: -1;
+  left: 20px;
+  bottom: 25px;
+  width: 250px;
+  height: 316px;
+ /* UI Properties */
+  background: var(--tp-new_theme-7) 0% 0% no-repeat padding-box;
+  box-shadow: 0px 5px 15px #00000029;
+  border-radius: 24px;
+}
+.stepCardItem {
+  margin: auto;
+  position: relative;
+  z-index: 1;
+  width: 290px;
+  height: 316px;
+ /* UI Properties */
+  background: var(--tp-new_theme-4) 0% 0% no-repeat padding-box;
+  
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.stepCardItem .title {
+  text-align: center;
+  font: normal normal bold 30px/37px Helvetica Neue;
+  letter-spacing: 0px;
+  color: var(--tp-new_theme-7);
+}
+.stepCardItem .title.custom {
+  padding-top: 175px;
+}
+.stepCardItem .image {
+  height: 140px;
+}
+.stepCardItem .video {
+  height: 140px;
+}
+.stepCardItem .titleTrans {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 193px;
+ /* UI Properties */
+  background: var(--tp-new_theme-3) 0% 0% no-repeat padding-box;
+  
+  border-radius: 24px;
+  font: normal normal bold 50px/82px Euphemia UCAS;
+  letter-spacing: 0px;
+  color: var(--tp-new_theme-6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.stepCardItem .video-trans {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 193px;
+ /* UI Properties */
+  background: var(--tp-new_theme-3) 0% 0% no-repeat padding-box;
+  
+  border-radius: 24px;
+  overflow: hidden;
+}
+.stepCardItem .video-trans > img {
+  max-width: inherit !important;
+  height: 100% !important;
+}
+.stepCardItem .video-trans .video-overlay {
+  display: block;
+  right: 14px;
+  bottom: 10px;
+  top: auto;
+  left: auto;
+  width: 32px;
+  height: 32px;
+}
+.stepCardItem .video-trans .video-overlay img {
+  width: 32px;
+}
+.stepCardItem .title-sub-trans {
+  position: absolute;
+  right: 60px;
+  left: 13px;
+  bottom: 13px;
+  font: normal normal bold 18px/25px Euphemia UCAS;
+  letter-spacing: 0px;
+  color: var(--tp-new_theme-6);
+  line-height: 40px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-align: right;
+}
+.stepCardItem .sound {
+  position: absolute;
+  right: 13px;
+  bottom: 9px;
+  cursor: pointer;
+}
+.stepCardItem .sound .pause-icon {
+  height: 42px;
+}
+.stepCardItem .sound img {
+  width: 36px !important;
+  filter: invert(1) !important;
+}
+.stepCardItem .sound svg {
+  font-size: 30px !important;
+  fill: var(--tp-new_theme-7);
+}
+.stepCardExplain {
+  margin-top: 40px;
+  text-align: center;
+  font: normal normal normal 20px/24px Helvetica;
+}
+/* .actions {
+  text-align: center;
+  position: absolute;
+  bottom: 20px;
+  width: 90%;
+} */
+/* .nextProgress, .arrowLeft, .arrowRight{
+  display: inline-block;
+  font-size: 30px;
+} */
+.buttonContainer {
+  display: inline-block;
+}
+
+
+
+.actions {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--tp-new_theme-6) 0% 0% no-repeat padding-box;
+  height: 80px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.actions > div {
+  background: var(--tp-new_theme-7) 0% 0% no-repeat padding-box;
+  border-radius: 16px;
+  margin: 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: 0;
+}
+.actions > div:hover {
+  background: var(--tp-new_theme-6);
+}
+.actions .arrowLeft {
+  width: 50px;
+  height: 50px;
+  color: var(--tp-new_theme-3);
+}
+.actions .arrowLeft.disabled {
+  pointer-events: none;
+}
+.actions .action-icon {
+  position: relative;
+  background: transparent;
+  box-shadow: none;
+  border: 0 none;
+}
+.actions .action-icon svg {
+  fill: var(--tp-new_theme-4);
+}
+.actions .action-icon::before {
+  content: '';
+  position: absolute;
+  top: -35px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 12px solid var(--tp-new_theme-4);
+}
+.actions .nextProgress {
+  width: 64px;
+  height: 64px;
+}
+.actions .nextProgress.changeColor {
+  background-color: var(--tp-new_theme-5);
+}
+.actions .nextProgress.video {
+  width: 44px;
+  height: 44px;
+  margin: 0 18px;
+  background: #ff1819 0% 0% no-repeat padding-box;
+  border-radius: 50%;
+  position: relative;
+}
+.actions .nextProgress.video .video-overlay-step {
+  position: absolute;
+  border-radius: 50%;
+}
+.actions .nextProgress.video .video-overlay-step.custom-01 {
+  z-index: 1;
+  width: 60px;
+  height: 60px;
+ /* UI Properties */
+  background: #ff1819 0% 0% no-repeat padding-box;
+  opacity: 0.2;
+}
+.actions .nextProgress.video .video-overlay-step.custom-02 {
+  z-index: 0;
+  width: 80px;
+  height: 80px;
+ /* UI Properties */
+  background: #ff1819 0% 0% no-repeat padding-box;
+  opacity: 0.09;
+}
+.actions .nextProgress.video .stop svg, .actions .nextProgress.video .play svg {
+  fill: var(--tp-new_theme-7);
+  font-size: 28px;
+}
+.actions .nextProgress.video .play svg {
+  margin-left: 3px;
+}
+.actions .nextProgress.video .record svg {
+  fill: var(--tp-new_theme-7);
+  width: 14px;
+}
+.actions .nextProgress.video .stop, .actions .nextProgress.video .play, .actions .nextProgress.video .record {
+  z-index: 2;
+  opacity: 0;
+  visibility: hidden;
+  width: 0;
+}
+.actions .nextProgress.video .stop.show, .actions .nextProgress.video .play.show, .actions .nextProgress.video .record.show {
+  opacity: 1;
+  visibility: visible;
+  width: auto;
+}
+.actions .arrowRight {
+  width: 50px;
+  height: 50px;
+  color: var(--tp-new_theme-3);
+}
+.actions .arrowRight.disabled {
+  pointer-events: none;
+}

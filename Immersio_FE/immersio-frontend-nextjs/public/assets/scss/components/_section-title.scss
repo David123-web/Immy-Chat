@@ -1,0 +1,105 @@
+@use '../utils/' as *;
+
+/* section title css start */
+
+.section {
+    &__title {
+        font-size: 38px;
+        font-weight: 700;
+        margin-bottom: 3px;
+
+        @media #{$lg} {
+            font-size: 42px;
+        }
+
+        @media #{$xs} {
+            font-size: 32px;
+        }
+
+        &-2 {
+            font-size: 42px;
+            font-weight: 750;
+            margin-bottom: 8px;
+            color: var(--tp-new_theme-1);
+
+            &-30 {
+                font-size: 30px;
+            }
+
+            @media #{$xs} {
+                font-size: 28px;
+            }
+        }
+
+        &-3 {
+            font-size: 42px;
+            font-weight: 750;
+            margin-bottom: 8px;
+            color: var(--tp-new_theme-1);
+
+            &-30 {
+                font-size: 30px;
+            }
+
+            @media #{$xs} {
+                font-size: 28px;
+            }
+        }
+
+        &-wrapper {
+            & p {
+                font-size: 16px;
+            }
+        }
+
+        &-44 {
+            font-size: 42px;
+
+            @media #{$xs} {
+                font-size: 35px;
+            }
+        }
+
+        &-40 {
+            font-size: 38px;
+
+            @media #{$xs} {
+                font-size: 30px;
+            }
+
+            @media #{$md} {
+                font-size: 35px;
+            }
+        }
+
+        &-30 {
+            font-size: 30px;
+        }
+
+        &-pre {
+            font-size: 16px;
+            font-weight: 500;
+            text-transform: capitalize;
+            color: var(--tp-new_theme-3);
+            display: inline-block;
+            margin-bottom: 5px;
+
+            &-2 {
+                font-size: 16px;
+                font-weight: 500;
+                text-transform: capitalize;
+                color: var(--tp-new_theme-3);
+                display: inline-block;
+                margin-bottom: 6px;
+            }
+
+            &-3 {
+                font-size: 16px;
+                font-weight: 500;
+                text-transform: capitalize;
+                display: inline-block;
+                margin-bottom: 6px;
+            }
+        }
+    }
+}

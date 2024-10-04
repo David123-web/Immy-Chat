@@ -1,0 +1,24 @@
+
+.footerWrapper {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--tp-new_theme-6);
+}
+
+.headerWrapper {
+    background-color: var(--tp-new_theme-7);
+}
+
+.addRowWrapper {
+    margin-top: 10px;
+}
+
+.editButton {
+    display: flex;
+    margin-left: auto;
+    background-color: var(--tp-new_theme-3);
+    border: none;
+    margin-right: 10px;
+    color: var(--tp-new_theme-7);
+    border-radius: 7px;
+}

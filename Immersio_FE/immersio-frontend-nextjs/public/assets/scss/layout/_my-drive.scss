@@ -1,0 +1,23 @@
+.my_drive_page {
+  /* ------------------------------ PROGRESS ITEM ----------------------------- */
+  .ant-progress-small.ant-progress-line {
+    .ant-progress-outer {
+      width: 90%;
+    }
+    .ant-progress-text {
+      display: inline-flex;
+      justify-content: center;
+      width: 2rem;
+      align-items: center;
+      height: 2rem;
+      margin-left: 1rem;
+      .anticon {
+        font-size: 1.2rem;
+      }
+    }
+  }
+  /* --------------------------------- UPLOAD --------------------------------- */
+  .ant-upload{
+    width: 100%;
+  }
+}

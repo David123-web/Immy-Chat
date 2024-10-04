@@ -1,0 +1,144 @@
+.imageDiv {
+    text-align: center;
+}
+
+.parentCard {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.imageCard {
+    width: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.imageContainer {
+    position: relative;
+}
+
+.checkMarkRight {
+
+    font-size: 200px;
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: green;
+    margin-left: 50px;
+}
+
+.checkMarkWrong {
+
+    font-size: 200px;
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: red;
+    margin-left: 50px;
+}
+
+.wordCard {
+    display: block;
+    height: 50px;
+    font-size: 30px;
+    border-bottom: 1px solid var(--tp-new_theme-1);
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.keyboard {
+    width: 100%;
+}
+
+.key {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: inline-block;
+    margin: 5px;
+    background-color: var(--tp-new_theme-6);
+    text-align: center;
+    font-size: 20px;
+    padding-top: 2px;
+}
+
+.space {
+    flex: 1;
+    height: 40px;
+    border-radius: 10px;
+    display: inline-block;
+    margin: 5px;
+    background-color: var(--tp-new_theme-6);
+    text-align: center;
+    font-size: 20px;
+    padding-top: 2px;
+}
+
+.fullLine {
+    width: 100%;
+    display: flex;
+}
+
+.wrapperDiv {
+    display: inline-block;
+}
+
+.mediaButton {
+    display: inline;
+    font-size: 15px;
+    font-weight: 500;
+    margin-left: 5px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.iconStyle {
+    vertical-align: middle;
+    font-size: 150%;
+    color: var(--tp-new_theme-4);
+    margin-left: 10px;
+}
+
+.mediaWrapper {
+    margin-top: 12px;
+}
+
+
+.uploadParent {
+    width: 100%;
+    text-align: center;
+}
+
+.uploadZone {
+    height: 200px;
+    width: 100%;
+    background-color: var(--tp-new_theme-7);
+}
+
+.uploadZone p {
+    margin-top: 10px;
+}
+
+.uploadIcon {
+    font-size: 30px;
+    color: grey;
+    margin-top: 60px;
+}
+
+.footerWrapper {
+    text-align: right;
+}
+
+.save {
+    width: 100%;
+}
+
+.hintText {
+    margin-left: 10px;
+    margin-top: 10px;
+}

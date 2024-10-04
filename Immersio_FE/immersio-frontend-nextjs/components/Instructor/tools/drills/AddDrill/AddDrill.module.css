@@ -1,0 +1,16 @@
+ .icon {
+     display: flex;
+     vertical-align: middle;
+     justify-content: flex-end;
+     font-size: 130%;
+     color: #7F7F7F;
+     padding-right: 2px;
+ }
+
+ .edit_drill_row {
+     margin-top: 10px;
+     background: var(--tp-new_theme-7);
+     padding: 10px 15px;
+     display: flex;
+ }
+ 

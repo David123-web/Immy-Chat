@@ -1,0 +1,16 @@
+{
+	"printWidth": 120,
+	"semi": true,
+	"singleQuote": true,
+	"useTabs": true,
+	"tabWidth": 2,
+	"overrides": [
+		{
+			"files": "*.{js,jsx,tsx,ts,scss,json,html}",
+			"options": {
+				"tabWidth": 2
+			}
+		}
+	],
+	"max-line-length": [true, 120]
+}

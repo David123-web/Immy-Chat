@@ -1,0 +1,35 @@
+service: immersio-backend
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: ap-southeast-1
+
+plugins:
+  - serverless-offline
+  - serverless-jetpack
+
+package:
+  exclude:
+    - .git/**
+    - src/**
+    - test/**
+    - e2e/**
+    - nodemon.json
+    - README.md
+    - "**/node_modules/aws-sdk/**" # included on Lambda.
+  include:
+    - .env
+
+functions:
+  index:
+    handler: dist/index.handler
+    events:
+    - http:
+        cors: true
+        path: '/'
+        method: any
+    - http:
+        cors: true
+        path: '{proxy+}'
+        method: any

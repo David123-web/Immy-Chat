@@ -1,0 +1,248 @@
+@use '../utils' as *;
+.price-section {
+  background-color: var(--tp-new_theme-6);
+
+  .checkbox label:after, 
+  .radio label:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+  
+  .checkbox .cr,
+  .radio .cr {
+    position: relative;
+    display: inline-block;
+    border: 1px solid var(--tp-new_theme-6);
+    border-radius: .25em;
+    width: 1.3em;
+    height: 1.3em;
+    margin-right: .5em;
+    background-color: var(--tp-new_theme-6)
+  }
+  
+  .radio .cr {
+    border-radius: 50%;
+  }
+  
+  .checkbox .cr .cr-icon,
+  .radio .cr .cr-icon {
+    position: absolute;
+    font-size: .8em;
+    line-height: 0;
+    top: 50%;
+    left: 20%;
+  }
+  
+  .radio .cr .cr-icon {
+    margin-left: 0.04em;
+  }
+  
+  .checkbox label input[type="checkbox"],
+  .radio label input[type="radio"] {
+    display: none;
+  }
+  
+  .checkbox label input[type="checkbox"] + .cr > .cr-icon,
+  .radio label input[type="radio"] + .cr > .cr-icon {
+    transform: scale(3) rotateZ(-20deg);
+    opacity: 0;
+    transition: all .3s ease-in;
+  }
+  
+  .checkbox label input[type="checkbox"]:checked + .cr > .cr-icon,
+  .radio label input[type="radio"]:checked + .cr > .cr-icon {
+    transform: scale(1) rotateZ(0deg);
+    opacity: 1;
+  }
+  
+  .checkbox label input[type="checkbox"]:disabled + .cr,
+  .radio label input[type="radio"]:disabled + .cr {
+    opacity: .5;
+  }
+  .checkbox {
+    label {
+      font-size: 18px;
+      color: var(--tp-new_theme-1);
+      font-weight: 700;
+      .sub-text {
+        font-weight: 400;
+        font-size: 15px;
+        padding-left: 35px;
+        display: block;
+      }
+    }
+  }
+
+  .price-steps {
+    max-width: 570px;
+    margin: auto;
+    position: relative;
+
+    &-line {
+      position: absolute;
+      height: 3px;
+      background-color: #777;
+      left: 16%;
+      right: 16%;
+      z-index: 1;
+      top: 19PX;
+    }
+
+    &-group {
+      display: flex;
+      z-index: 2;
+
+      .step {
+        z-index: 2;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        cursor: pointer;
+
+        &-circle {
+          width: 40px;
+          height: 40px;
+          border-radius: 40px;
+          border: 3px solid #777;
+          background-color: var(--tp-new_theme-7);
+          
+          font-size: 18px;
+          font-weight: bold;
+          text-align: center;
+          line-height: 36px;
+        }
+
+        &-text {
+          margin-top: 10px;
+          font-size: 16px;
+          font-weight: bold;
+          max-width: 80%;
+        }
+
+        &.active {
+          .step-text {
+            color: var(--tp-new_theme-3);
+          }
+          .step-circle {
+            color: var(--tp-new_theme-3);
+            border-color: var(--tp-new_theme-3);
+          }
+        }
+      }
+    }
+  }
+
+  .price-title {
+    margin: 65px 0 40px 0;
+    font-size: 38px;
+    font-weight: bold;
+    color: var(--tp-new_theme-3);
+    text-align: center;
+  }
+
+  .price-checkbox {
+    display: flex;
+    max-width: 500px;
+    margin: auto;
+    position: relative;
+
+    > div {
+      float: none;
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+  }
+
+  .price-deals {
+    .deal {
+      flex: 1;
+      background-color: var(--tp-new_theme-7);
+      border: 1px solid #A3A3A3;
+      border-radius: 10px;
+      padding: 20px 30px;
+
+      @media #{$xs} {
+        padding: 24px 16px;
+      }
+
+      @media #{$laptopScreen} {
+        margin-left: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: calc(50% - 30px);
+        width: calc(50% - 30px);
+      }
+
+      .deal-title {
+        font-size: 34px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: var(--tp-new_theme-1);
+        text-align: center;
+      }
+
+      .deal-price {
+        font-size: 22px;
+        font-weight: bold;
+        height: 30px;
+        color: var(--tp-new_theme-1);
+        @media #{$xs} {
+          text-align: center;
+        }
+      }
+
+      .deal-price-sub {
+        font-size: 14px;
+        height: 20px;
+        margin-bottom: 24px;
+
+        @media #{$xs} {
+          text-align: center;
+        }
+      }
+
+      .deal-action {
+        .genius-btn {
+          height: 40px;
+          line-height: 40px;
+          min-width: 148px;
+          border-radius: 5px;
+
+          &.disabled {
+            background: var(--tp-new_theme-5);
+            color: var(--tp-new_theme-7);
+          }
+        }
+      }
+
+      .deal-benefit {
+        color: var(--tp-new_theme-1);
+        > div {
+          margin-bottom: 10px;
+        }
+
+        &.optimize {
+          text-align: center;
+        }
+      }
+
+      &.active {
+        background-color: rgba(63, 176, 172, 0.22);
+        border: none;
+        .deal-action {
+          .genius-btn {
+            background-color: var(--tp-new_theme-5);
+            color: var(--tp-new_theme-7);
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+.languageLevelParent {
+    display: flex;
+    flex-direction: row;
+}
+
+.languageLevelParent>div {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+.time_period_div, .day_of_week_div {
+}
+
+
+.time_period, .day_of_week {
+    background-color: var(--tp-new_theme-7);
+    display: inline-block;
+    height: 30px;
+    width: 100px;
+    box-shadow: 0px 8px 16px #00000029;
+    border-radius: 5px;
+    text-align: center;
+    vertical-align: middle;
+    margin: 10px;
+}

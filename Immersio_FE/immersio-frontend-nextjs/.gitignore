@@ -1,0 +1,6 @@
+.next 
+node_modules
+.env
+package-lock.json
+*.code-workspace
+.vscode/launch.json

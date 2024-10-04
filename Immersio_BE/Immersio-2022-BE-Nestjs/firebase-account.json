@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "oauth-immersio",
+  "private_key_id": "f54e1186bb5dfd96c50ba34543b3d32d22a069ef",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCv+GFJEaumSVnU\n0pvmnZjVdsCKrzu8pVpkIaE8JnHrOCdiD2Sh/QOt8SiqpyhXv/X65MLdFJ26JVjX\nOxyFok/wmFQmahUIhs0U95rbpRAvnUtPGF1N4z8hNUp+3ScO7K5NNSkV/wgw5eHW\nLJlvhOaqJGaCbFQNIfaq8Y3KQDT/pCS4HtgqJDKNTTkVG36K+XcjNggUPf/gHczU\nacCgWkXUJiqqq/D9f1GSUrBBq2Jrd3paYu/0ddYnViUq1eRyuQ65S9K06AZlEE5Q\nwskBwGq0vwEjepJnT+rNLTkT8+9/b2vKyzXqhVkFyg2OtI+zhxx+KMtExKd6k1y/\nWT+Ug4JJAgMBAAECggEAPfny+bM5i2WGOAi9U+nprDUY9z9kgLqULXQSv4ai1L+A\nT28weEUOiLLJKeGZud4oGmd7ojXin28L7TIqh351PT3JVYZDRi+EB4B1kCqAmuSB\nY6gnJImG8IE+bZQib4U4loTEpbSfA+nTMoWevMJII2CSohjZOY7eu7I7yCH5CJgH\ns7v+WrvtlYJYCYS+cpvYf+KMe5lhXGuh2XT7lgjDgNqOGG70Si4hXGYuSlVgPssI\nzW6+OAqlvHkcutp2Zud4WJki+gKPA4BwNWikjuOk1tYVY28SmTE4MFmxMQv4UsOz\nZ3gi/CAZ0Q8tGdE+1f4lJCHdV/vPOJoe+7DTngTgSQKBgQDY6ibx+gNqscFrS858\no9y8UXLeL/OIuz202FZQycuUAsJPB7hSRyp5lRkKzsd7SD29rUKgAJKrxYGY7M2t\ngVM+dCNkomawVmXilhzlQW4cUHzAu30r8uZr4sCqEvcHmwguXZSg0hoD4YE+wWoL\nYCQaKuXwV6Rs8UEGBlyJ5k7nfwKBgQDPrYq92nslUNJviZYHvmfH19QbQAlI4AMX\n804NQD/upQaeDIZ6QUYCWbpywfjWCJfb29LshnR7HIZjVugl5GaNymMxuaDBo2aR\n59hU1tVyrPuORQa3WUkpXYbTsVH63yVbsRg142SLrIOQyvVJh79AJI6tp6l0Ogdv\nesTzzWM6NwKBgQCFxOD/mQ9CXRzK7pUIiIU4HYKZQzkMuWv0evXAHLJPNORfmIMz\nOnAXSruGzr52aLaqoo7T3YaWJ9ckV+T/eyG7AiRRi1WIqb9rXOe0+gTNsVU+BmHL\nGKDBJ7VpLQjqx9DjxxJBm1Av1IHAEccz/LZG7O2gqmvcQ2u2K3YmFMHUQQKBgEi6\nhrb8F1o3Fqr27PKjTKbgv6gXYekCgjLWAwSC9qC1bD7XNhUEXOcf0zqzEVirQ7s8\nHX61i389uxZ47e2vMfb/5IMadeC6P4ZjQhBb9/4j9CibpcF55DQ3S6tBEuufT+7v\ncwIUMzby4FRJr2LjxidJZioMaDyKweXZgbW7vL87AoGBALSMFQtL6PhCWjtvQ2WY\nPG/2HYbNYZcaK1leyBO49MQlkDcD1/O3eQ4gTnkqVZNTVUpRXDekJ2i4Zqm6sWq+\nLVy2CoS/Ogf02Jnj4+1kfwmSOHuu5yFnhJJzy6Eq3qn/OXRFMCRbdvfVQK5DSmE4\naM67FVoOZIt4x7NPQ+QQv07C\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-tte26@oauth-immersio.iam.gserviceaccount.com",
+  "client_id": "109648803151126491635",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-tte26%40oauth-immersio.iam.gserviceaccount.com"
+}

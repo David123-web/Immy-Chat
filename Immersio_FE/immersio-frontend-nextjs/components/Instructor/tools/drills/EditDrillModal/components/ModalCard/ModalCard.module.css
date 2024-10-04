@@ -1,0 +1,29 @@
+.cardTitle {
+    display: inline;
+    color: #7F7F7F;
+    font-size: 20px;
+}
+ 
+.itemStyle {
+    border: 1px solid #999;
+    padding: 5px;
+    background-color: var(--tp-new_theme-7);
+    border-radius: 5px;
+ }
+ 
+.icon {
+     vertical-align: middle;
+     font-size: 130%;
+     color: #7F7F7F;
+     padding-right: 2px;
+ }
+
+ .titleWrapper {
+    display: flex;
+    justify-content: space-between;
+ }
+
+.iconWrapper {
+    display: flex;
+    margin-left: auto;
+}

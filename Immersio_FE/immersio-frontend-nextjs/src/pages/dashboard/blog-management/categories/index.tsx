@@ -1,0 +1,287 @@
+import CustomTable from '@/components/common/CustomTable';
+import HeaderTable from '@/components/common/HeaderTable';
+import DashboardRoute from '@/components/routes/DashboardRoute';
+import { PAGE_SIZE, TAILWIND_CLASS } from '@/constants';
+import { useMutation } from '@/hooks/useMutation';
+import { useQuery } from '@/hooks/useQuery';
+import {
+	BLOG_CATEGORY_STATUS,
+	IAddBlogCategoryRequest,
+	IBlogCategoriesTable,
+	IGetBlogCategoriesResponse,
+} from '@/src/interfaces/blogManagement/blogManagement.interface';
+import { ICommonSearchRequest, Option } from '@/src/interfaces/common/common.interface';
+import { IHeaderTable } from '@/src/interfaces/mydrive/mydrive.interface';
+import { withTranslationsProps } from '@/src/next/with-app';
+import { createBlogCategory, deleteBlogCategoryById, getBlogCategories, updateBlogCategoryById } from '@/src/services/blogManagement/apiBlogManagement';
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { Button, Form, Input, Modal, Pagination, Select } from 'antd';
+import Head from 'next/head';
+import { useState } from 'react';
+import { useTranslation } from 'next-i18next';
+import { toast } from 'react-toastify';
+
+const blogCategoryStatus = [
+	{
+		name: 'Active',
+		value: true,
+	},
+	{
+		name: 'Not Active',
+		value: false,
+	},
+];
+
+const BlogCategories = () => {
+	const { t } = useTranslation()
+	const [currentPage, setCurrentPage] = useState(1);
+	const [formSearch] = Form.useForm<ICommonSearchRequest>();
+	const [addBlogCategoryForm] = Form.useForm();
+	const [isOpenAddBlogCategory, setIsOpenAddBlogCategory] = useState(false);
+
+	const columns: IHeaderTable<IBlogCategoriesTable & { tools: string }>[] = [
+		{
+			label: t('dashboard.option.name'),
+			key: 'name',
+			widthGrid: '1fr',
+		},
+		{
+			label: t('dashboard.option.status'),
+			key: 'status',
+			widthGrid: '1fr',
+		},
+		{
+			label: t('dashboard.option.actions'),
+			key: 'tools',
+			widthGrid: '1fr',
+		},
+	];
+
+	const searchBlogCategoriesOptions: Option<keyof any>[] = [
+		{
+			value: 'name',
+			label: t('dashboard.option.name'),
+		},
+		{
+			value: 'status',
+			label: t('dashboard.option.status'),
+		},
+	];
+
+	/* ----------------------- GET LIST OF BLOG CATEGORIES ---------------------- */
+	const [listOfBlogCategories, setListOfBlogCategories] = useState<IGetBlogCategoriesResponse>({
+		total: 0,
+		data: [],
+	});
+	const [searchKey, setSearchKey] = useState<string>('');
+	const getListOfBlogCategoriesQuery = useQuery<any>(
+		['IGetBlogCategoriesResponse', currentPage],
+		() =>
+			getBlogCategories({
+				take: PAGE_SIZE,
+				skip: PAGE_SIZE * (currentPage - 1),
+			}),
+		{
+			onSuccess: (res) => {
+				setListOfBlogCategories({ total: 100, data: res.data.filter(x => !x.isDeleted)});
+			},
+			onError: (err) => {
+				toast.error(err.data?.message);
+			},
+		}
+	);
+
+	/* -------------------------- CREATE BLOG CATERORY -------------------------- */
+	const onAddBlogCategory = (value) => {
+		const body: IAddBlogCategoryRequest = {
+			name: value.name,
+			active: value.status,
+		};
+		if(!value.id){
+			createBlogCategoryMutation.mutate(body);
+		} else {
+			updateBlogCategoryMutation.mutate({id: value.id, body});
+		}
+	};
+
+	const createBlogCategoryMutation = useMutation<any, IAddBlogCategoryRequest>(createBlogCategory, {
+		onSuccess: (res) => {
+			toast.success(t('dashboard.notification.create_blog_category_success'));
+			setIsOpenAddBlogCategory(false);
+			addBlogCategoryForm.resetFields();
+			getListOfBlogCategoriesQuery.refetch();
+		},
+		onError: (err) => {
+			toast.error(t('dashboard.notification.create_blog_category_error'));
+		},
+	});
+
+	/* --------------------------- EDIT BLOG CATEGORY --------------------------- */
+	const onEditBlogCategory = (id: string) => {
+		const selectedBlogCategory = listOfBlogCategories.data.find((item) => item.id === id);
+		addBlogCategoryForm.setFieldsValue({
+			id: selectedBlogCategory.id,
+			name: selectedBlogCategory.name,
+			status: selectedBlogCategory.active 
+		});
+		setIsOpenAddBlogCategory(true);
+	};
+
+	const updateBlogCategoryMutation = useMutation<any, {id: string, body: IAddBlogCategoryRequest}>(updateBlogCategoryById, {
+		onSuccess: (res) => {
+			toast.success(t('dashboard.notification.update_blog_category_success'));
+			setIsOpenAddBlogCategory(false);
+			addBlogCategoryForm.resetFields();
+			getListOfBlogCategoriesQuery.refetch();
+		},
+		onError: (err) => {
+			toast.error(t('dashboard.notification.update_blog_category_error'));
+		},
+	});
+
+	/* --------------------------- DELETE BLOG CATEGORY --------------------------- */
+	const onDeleteBlogCategoryMutation = useMutation<any, string>(deleteBlogCategoryById, {
+		onSuccess: (res) => {
+			toast.success(t('dashboard.notification.delete_blog_category_success'));
+			getListOfBlogCategoriesQuery.refetch();
+		},
+		onError: (err) => {
+			toast.error(t('dashboard.notification.delete_blog_category_error'));
+		},
+	})
+
+	return (
+		<DashboardRoute>
+			<Head>
+				<title>Blog Categories</title>
+				<meta name="description" content="Generated by create next app" />
+			</Head>
+			<HeaderTable
+				tableName={t('dashboard.title.blog_categories')}
+				form={formSearch}
+				searchOptions={searchBlogCategoriesOptions}
+				onAdd={() => setIsOpenAddBlogCategory(true)}
+				onGetSearchKey={(searchKey) => {
+					setSearchKey(searchKey ?? '');
+					getListOfBlogCategoriesQuery.refetch();
+				}}
+			/>
+			<CustomTable
+				className="border-theme-6 tw-border tw-border-solid tw-shadow-lg tw-rounded-b-xl"
+				columns={columns}
+				isLoading={false}
+				data={listOfBlogCategories.data.map((item) => ({
+					name: item.name,
+					status: item.active ? BLOG_CATEGORY_STATUS.ACTIVE : BLOG_CATEGORY_STATUS.NOT_ACTIVE,
+					tools: (
+						<div className="tw-flex tw-items-center tw-gap-1">
+							<Button
+								icon={
+									<EditOutlined
+										style={{
+											fontSize: 16,
+										}}
+									/>
+								}
+								className="bg-theme-4 color-theme-7 !tw-border-none"
+								onClick={() => onEditBlogCategory(item.id)}
+							/>
+							<Button
+								icon={
+									<DeleteOutlined
+										style={{
+											fontSize: 16,
+										}}
+									/>
+								}
+								className="!tw-bg-deleteIconDavid color-theme-7 !tw-border-none"
+								onClick={() => onDeleteBlogCategoryMutation.mutate(item.id)}
+							/>
+						</div>
+					),
+				}))}
+			/>
+			<Pagination
+				className="!tw-mt-6 tw-flex tw-justify-end"
+				total={listOfBlogCategories.total}
+				pageSize={PAGE_SIZE}
+				current={1}
+				onChange={(page: number) => {
+					setCurrentPage(page);
+				}}
+			/>
+			<Modal
+				title={`${addBlogCategoryForm.getFieldValue('id') ? t('dashboard.button.edit') : t('dashboard.button.add')} ${t('dashboard.title.blog_category')}`}
+				open={isOpenAddBlogCategory}
+				footer={[
+					<Button
+						onClick={() => {
+							setIsOpenAddBlogCategory(false);
+						}}
+						className={`tw-rounded-lg`}
+					>
+						{t('dashboard.button.cancel')}
+					</Button>,
+					<Button
+						htmlType="submit"
+						form="addBlogCategory"
+						onClick={() => {
+							setIsOpenAddBlogCategory(false);
+						}}
+						className={`${TAILWIND_CLASS.BUTTON_ANTD} tw-rounded-lg`}
+					>
+						{t('dashboard.button.save')}
+					</Button>,
+				]}
+				width={400}
+				afterClose={() => {
+					addBlogCategoryForm.resetFields();
+				}}
+				destroyOnClose
+				maskClosable={false}
+				keyboard
+				onCancel={() => {
+					setIsOpenAddBlogCategory(false);
+				}}
+			>
+				<Form id="addBlogCategory" onFinish={onAddBlogCategory} form={addBlogCategoryForm} layout="vertical">
+					<Form.Item className="tw-hidden" name="id" initialValue={null} />
+					<Form.Item
+						name="name"
+						label={t('dashboard.option.category_name')}
+						rules={[
+							{
+								required: true,
+							},
+						]}
+					>
+						<Input placeholder={t('dashboard.placeholder.enter_category_name')} />
+					</Form.Item>
+					<Form.Item
+						name="status"
+						label={t('dashboard.option.category_status')}
+						rules={[
+							{
+								required: true,
+							},
+						]}
+					>
+						<Select
+							placeholder={t('dashboard.placeholder.select_a_status')}
+							options={blogCategoryStatus.map((la) => ({
+								value: la.value,
+								label: la.name,
+							}))}
+						/>
+					</Form.Item>
+				</Form>
+			</Modal>
+		</DashboardRoute>
+	);
+};
+
+export async function getServerSideProps(ctx) {
+  return await withTranslationsProps(ctx)
+}
+
+export default BlogCategories;

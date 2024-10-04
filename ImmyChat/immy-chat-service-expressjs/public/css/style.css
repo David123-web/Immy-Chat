@@ -1,0 +1,264 @@
+@import url("https://fonts.googleapis.com/css?family=Red+Hat+Display:400,500,900&display=swap");
+body, html {
+  font-family: sans-serif;
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.25em;
+  letter-spacing: 0.025em;
+  color: #333;
+  background: #F7F7F7;
+}
+
+/*.center {
+  position: absolute;
+  top: 50%;
+  left: calc(50% + 0rem);
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}*/
+
+.pic {
+  width: 4rem;
+  height: 4rem;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+}
+
+.contact {
+  position: relative;
+  margin-bottom: 1rem;
+  padding-left: 5rem;
+  height: 4.5rem;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          flex-direction: column;
+  -webkit-box-pack: center;
+          justify-content: center;
+}
+.contact .pic {
+  position: absolute;
+  left: 0;
+}
+.contact .name {
+  font-weight: 550;
+  font-size: 25px;
+  margin-bottom: 0.125rem;
+  margin-left: 0rem;
+}
+.contact .message, .contact .seen {
+  font-size: 0.9rem;
+  color: #999;
+}
+.contact .badge {
+  box-sizing: border-box;
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  padding-top: 0.125rem;
+  border-radius: 1rem;
+  top: 0;
+  left: 2.5rem;
+  background: #333;
+  color: white;
+}
+
+/*.chat {
+  position: relative;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+  width: 24rem;
+  height: 38rem;
+  z-index: 2;
+  box-sizing: border-box;
+  border-radius: 1rem;
+  background: white;
+  box-shadow: 0 0 8rem 0 rgba(0, 0, 0, 0.1), 0rem 2rem 4rem -3rem rgba(0, 0, 0, 0.5);
+}*/
+.chat .contact.bar {
+  flex-basis: 3rem;
+  flex-shrink: 0;
+  margin: 1.5rem;
+  box-sizing: border-box;
+}
+.chat .messages {
+  padding: 0.5rem;
+  background: #F7F7F7;
+  flex-shrink: 2;
+  overflow-y: auto;
+  box-shadow: inset 0 2rem 2rem -2rem rgba(0, 0, 0, 0.05), inset 0 -2rem 2rem -2rem rgba(0, 0, 0, 0.05);
+}
+
+.chat .messages .message {
+  box-sizing: border-box;
+  padding: 0.5rem 0.8rem;
+  margin: 1rem;
+  background: #FFF;
+  border-radius: 1.125rem 1.125rem 1.125rem 0;
+  min-height: 2.25rem;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  max-width: 66%;
+  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.075), 0rem 1rem 1rem -1rem rgba(0, 0, 0, 0.1);
+}
+.chat .messages .message.parker {
+  margin: 1rem 1rem 1rem auto;
+  border-radius: 1.125rem 1.125rem 0 1.125rem;
+  background: #005792;
+  color: white;
+}
+.chat .messages .message .typing {
+  display: inline-block;
+  width: 0.8rem;
+  height: 0.8rem;
+  margin-right: 0rem;
+  box-sizing: border-box;
+  background: #ccc;
+  border-radius: 50%;
+}
+.chat .messages .message .typing.typing-1 {
+  -webkit-animation: typing 3s infinite;
+          animation: typing 3s infinite;
+}
+.chat .messages .message .typing.typing-2 {
+  -webkit-animation: typing 3s 250ms infinite;
+          animation: typing 3s 250ms infinite;
+}
+.chat .messages .message .typing.typing-3 {
+  -webkit-animation: typing 3s 500ms infinite;
+          animation: typing 3s 500ms infinite;
+}
+.chat .input {
+  box-sizing: border-box;
+  flex-basis: 4rem;
+  flex-shrink: 0;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+  padding: 0 0.5rem 0 1.5rem;
+}
+.chat .input2 {
+  box-sizing: border-box;
+  flex-basis: 4rem;
+  flex-shrink: 0;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+  padding: 0;
+}
+.chat .input i {
+  box-sizing: border-box;
+  font-size: 3rem;
+  margin-top: 1rem;
+  margin-right: 0.2rem;
+  margin-bottom: 0rem;
+  color: #005792;
+  cursor: pointer;
+  -webkit-transition: color 200ms;
+  transition: color 200ms;
+  display: block;
+  width: 3rem;
+  height: 3rem;
+  border: 0;
+  border-radius: 50%;
+  text-align: center;
+  color: #005792;
+  will-change: transform, filter;
+  transition: all 0.3s ease-out;
+}
+.chat .input i:hover {
+  color: #00bcd4;
+  transform: scale(1.2);
+}
+
+.chat .input i:active {
+  color: #d42a00;
+  transform: scale(1.2);
+}
+.chat .input input {
+  border: none;
+  background-image: none;
+  background-color: white;
+  width: 16rem;
+  padding: 0.5rem 1rem;
+  margin-right: 1rem;
+  border-radius: 1.125rem;
+  -webkit-box-flex: 2;
+          flex-grow: 2;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1), 0rem 1rem 1rem -1rem rgba(0, 0, 0, 0.2);
+  font-family: Red hat Display, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.025em;
+}
+.chat .input input:placeholder {
+  color: #999;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@-webkit-keyframes typing {
+  0%, 75%, 100% {
+    -webkit-transform: translate(0, 0.25rem) scale(0.9);
+            transform: translate(0, 0.25rem) scale(0.9);
+    opacity: 0.5;
+  }
+  25% {
+    -webkit-transform: translate(0, -0.25rem) scale(1);
+            transform: translate(0, -0.25rem) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes typing {
+  0%, 75%, 100% {
+    -webkit-transform: translate(0, 0.25rem) scale(0.9);
+            transform: translate(0, 0.25rem) scale(0.9);
+    opacity: 0.5;
+  }
+  25% {
+    -webkit-transform: translate(0, -0.25rem) scale(1);
+            transform: translate(0, -0.25rem) scale(1);
+    opacity: 1;
+  }
+}
+
+.pic.stark {
+  background-image: url("https://www.ecourses.vn/classroom/wp-content/uploads/2020/08/openspeak-03.png");
+}
+
+.pic.stark > a {
+  width: 60.8px;
+  height: 60.8px;
+  display: block;
+}
+
+#btn-start-stop{
+  width: 100%;
+  height: 100px;
+}
+
+#btn-start-stop #btnImg{
+  width: 75px;
+  margin-top: 20px;
+  margin-left: calc(50% - 37.5px);
+}
+
+/*#btn-start-stop .pause{
+  width: 40px;
+} */
+
+#btn-release-microphone, #btn-download-recording, audio,
+#btn-start-recording, #btn-stop-recording{
+  display: none;
+}

@@ -1,0 +1,138 @@
+@use '../utils' as *;
+
+/*----------------------------------------*/
+/*  22. FAQ CSS START
+/*----------------------------------------*/
+
+.faq{
+    &__area {
+        background-color: #ddf1f0;
+    }
+    &__tabs {
+        border: 0 none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .nav-link {
+            background: #9F9C9C 0% 0% no-repeat padding-box;
+            border-radius: 3px;
+            border: 0 none;
+            color: var(--tp-new_theme-7);
+            padding: 3px 20px;
+            margin: 0 5px;
+
+            @media #{$xs} {
+                margin: 0 3px;
+            }
+
+            &.active,
+            &:hover {
+                background: var(--tp-new_theme-3);
+                color: var(--tp-new_theme-7);
+            }
+        }
+
+    }
+    &__tabs-content {
+        .accordion-item {
+            background-color: transparent;
+        }
+    }
+    &__accordion{
+        & .accordion-item{
+            border: none;
+            border-bottom: 1px solid rgba($color: var(--tp-new_theme-1), $alpha: .06);
+            padding: 15px 0;
+            padding-left: 65px;
+        }
+        & .accordion-item:first-of-type .accordion-button {
+            border-top-left-radius: 20px ;
+            border-top-right-radius: 20px;
+        }
+        & .accordion-button{
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--tp-new_theme-1);
+            border: 0;
+            padding: 15px 0;
+            padding-left: 25px;
+            position: relative;
+            @include border-radius(20px 20px 0 0);
+            width: 100%;
+            &::after{
+                position: absolute;
+                top: 50%;
+                left: -65px;
+                @include transform(translateY(-50%) rotate(0deg));
+                width: 50px;
+                height: 50px;
+                line-height: 50px;
+                text-align: center;
+                background-color: var(--tp-new_theme-6);
+                background-image: none;
+                content: '\2b';
+                font-family: var(--tp-ff-fontawesome);
+                font-weight: 500;
+                margin: inherit;
+                @include border-radius(50%);
+                @include transition(.3s);
+            }
+        }
+
+        & .accordion-button:focus {
+            box-shadow: none;
+        }
+        & .accordion-body{
+            padding: 0;
+            padding-right: 50px;
+            padding-left: 25px;
+            padding-bottom: 25px;
+
+            @media #{$xs}{
+                padding-right: 15px;
+            }
+            
+            & p{
+                font-size: 15px;
+                color: var(--tp-new_theme-1);
+                line-height: 24px;
+                margin-bottom: 0;
+            }
+        }
+
+        & .accordion-button:not(.collapsed){
+            background-color: transparent;
+            box-shadow: none;
+            background-color: var(--tp-new_theme-6);
+            &::after{
+                @include transform(translateY(-50%) rotate(45deg));
+                background-color: var(--tp-new_theme-3);
+                color: var(--tp-new_theme-7);
+            }
+        }
+        & .accordion-collapse{
+            @include border-radius(0 0 20px 20px);
+            background-color: var(--tp-new_theme-6);
+        }
+    }
+    &__wrapper{
+        & p{
+            font-size: 16px;
+            margin-bottom: 20px;
+            & a{
+                color: var(--tp-new_theme-3);
+                font-weight: 500;
+
+            }
+        }
+    }
+    &__item{
+        &-wrapper{
+            @media #{$md, $sm, $xs}{
+                padding-left: 0;
+                // margin-top: 50px;
+            }
+        }
+    }
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+    <title>Responsive Chat Box Design | Open Speak</title>
+    <script src="https://cdn.socket.io/socket.io-3.0.1.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/wave.css">
+  </head>
+  <body>
+
+      <div class="center">
+        <div class="chat">
+          <div class="contact bar">
+            <div class="pic stark"> <a href="https://openspeak.io/"></a> </div>
+            <div class="name">
+              Let's talk!
+            </div>
+          </div>
+          <div class="messages" id="chat">
+            <div class="message parker">
+              Welcome to our dialogue system. We are very glad to have you here. To start the conversation, type your message in the box.
+            </div>
+            <!-- <div class="message typing">
+              <em class="typing typing-1"></em>
+              <em class="typing typing-2"></em>
+              <em class="typing typing-3"></em>
+            </div> -->
+          </div>
+
+          <div class="input2">
+            <div id="btn-start-stop">
+              <img id="btnImg" class="fas fa-microphone" src="images/idle_mic.svg" alt="">
+                <div class="icon" id="icon" style="display:none;">
+                  <img src="images/mic_active.jpeg" class="pause" alt="">
+                    <div class="waves" style="background-color: #005792; margin-left: -16px;"></div>
+                    <div class="waves" style="background-color: #00bcd4; margin-left: 2px;"></div>
+                    <div class="waves" style="background-color: #005792; margin-left: 18px;"></div>
+                    <div class="waves" style="background-color: #00bcd4; margin-left: 36px;"></div>
+                </div>
+                <button id="btn-start-recording">Start Recording</button>
+                <button id="btn-stop-recording">Stop Recording</button>
+                <button id="btn-release-microphone">Release Microphone</button>
+                <button id="btn-download-recording">Download</button>
+                <div><audio controls autoplay playsinline></audio></div>
+                <div><audio id='aud' controls autoplay playsinline></audio></div>
+            </div>
+          </div>
+
+          <div class="input">
+            <input type="text" id="txt" placeholder="Type your message here...">
+            <i class="fa fa-paper-plane" id="txt_btn" style=font-size:1.8rem;margin-top:1.5rem; aria-hidden="true"></i>
+          </div>
+
+        </div>
+      </div>
+
+    <script src="https://www.WebRTC-Experiment.com/RecordRTC.js"></script>
+    <script src="js/recording.js" charset="utf-8"></script>
+
+  </body>
+</html>

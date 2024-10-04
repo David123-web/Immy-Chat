@@ -1,0 +1,815 @@
+@use '../utils' as *;
+
+.breadcrumb-teacher-register-section {
+  background-size: 100% 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-top: 20px;
+  position: relative;
+
+  @media #{$xs} {
+    padding-top: 0;
+  }
+
+  .breadcrumb-teacher-register-banner {
+    z-index: 2;
+    h1 {
+      line-height: 1.5;
+    }
+    p {
+      font: normal normal normal 18px/32px Roboto;
+      letter-spacing: 0px;
+    }
+    .btn {
+      padding-left: 0;
+    }
+  }
+
+  .breadcrumb-teacher-register-form {
+    position: relative;
+    z-index: 2;
+    width: 30%;
+    min-width: 370px;
+    height: fit-content;
+    background: var(--tp-new_theme-6) 0% 0% no-repeat padding-box;
+    box-shadow: 8px 8px 28px #00000029;
+    opacity: 0.9;
+    border-radius: 5px;
+    padding: 20px 35px;
+
+    @media #{$xs} {
+      min-width: unset;
+      padding: 30px 20px;
+    }
+
+    .breadcrumb-teacher-register-form-title {
+      text-align: left;
+      letter-spacing: 0px;
+      color: var(--tp-new_theme-1);
+      opacity: 1;
+      font-size: 28px;
+      font-weight: 650;
+      margin-bottom: 15px !important;
+    }
+
+    span {
+      font-size: 14.5px;
+    }
+
+    .teacher-register-input-form {
+      margin-top: 12px;
+
+      .full-input {
+        display: inline-block;
+        padding: 3px;
+        height: 46px;
+        width: 100%;
+        background: var(--tp-new_theme-7) 0% 0% no-repeat padding-box;
+        box-shadow: 0px 3px 6px #00000029;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        margin-left: 3px;
+        padding: 5px 10px;
+        position: relative;
+      }
+
+      input {
+        outline: none;
+        border: none;
+        display: block;
+        line-height: 1.5em;
+        font-size: 12px;
+        width: 80%;
+      }
+
+      label {
+        display: block;
+        font-size: 12px;
+        height: 20px;
+        color: #aeaeb2;
+      }
+
+      img {
+        position: absolute;
+        top: 17px;
+        right: 10px;
+      }
+
+      .signup-with-email-btn {
+        width: 100%;
+        height: 43px;
+        background: var(--tp-new_theme-3) 0% 0% no-repeat padding-box;
+        border-radius: 10px;
+        opacity: 1;
+        outline: none;
+        border: none;
+        margin-top: 10px;
+        margin-left: 3px;
+
+        a {
+          color: var(--tp-new_theme-7);
+        }
+      }
+    }
+
+    .hrtext {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .hrbefore,
+    .hrafter {
+      flex: auto;
+    }
+
+    .hrcontent {
+      text-align: center;
+
+      span {
+        font-size: 14.5px;
+        color: var(--tp-new_theme-2);
+        display: block;
+        margin: 0 10px;
+      }
+    }
+
+    .login-with-fb-gmail {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 30px;
+
+      .login-with-fb {
+        width: 50px;
+        height: 50px;
+        background: transparent url("/assets/img/teach/07.png") 0% 0% no-repeat
+          padding-box;
+        background-color: var(--tp-new_theme-7);
+        background-position: center;
+        border-radius: 18px;
+        margin: 0 5px;
+      }
+
+      .login-with-gmail {
+        width: 50px;
+        height: 50px;
+        background: transparent url("/assets/img/teach/09.png") 0% 0% no-repeat
+          padding-box;
+        background-color: var(--tp-new_theme-7);
+        background-position: center;
+        border-radius: 18px;
+        margin: 0 5px;
+      }
+    }
+
+    .policy-aggreement {
+      text-align: center;
+      color: var(--tp-new_theme-1);
+      font-size: 14px;
+      margin-top: 20px;
+
+      a {
+        color: var(--tp-new_theme-3);
+      }
+    }
+  }
+
+  .breadcrumb-teacher-register-form-info {
+    // position: absolute;
+    margin-top: 18%;
+    width: 60%;
+    min-width: 370px;
+    height: fit-content;
+
+    h2 {
+      font-size: 48px;
+      color: var(--tp-new_theme-7);
+    }
+
+    h5 {
+      font-size: 16px;
+      line-height: 26px;
+      color: var(--tp-new_theme-7);
+      font-weight: normal;
+      margin-bottom: 30px;
+    }
+
+    a {
+      color: var(--tp-new_theme-7);
+    }
+  }
+}
+
+.teacher-application-wrapper {
+  input,
+  select {
+    border-radius: 3px;
+    height: 32px;
+  }
+
+  background: var(--tp-new_theme-6) 0% 0% no-repeat padding-box;
+  min-height: 100vh;
+  .teacher-application-header-wrapper {
+    width: 100%;
+    height: 64px;
+
+    #main-menu {
+      padding: 10px 0;
+      background-color: var(--tp-new_theme-1);
+    }
+  }
+
+  .teacher-application {
+    padding: 15px 30% 120px 30%;
+    margin-top: 80px;
+
+    .ant-steps-item-title {
+      font-weight: 500;
+    }
+    .ant-steps-small.ant-steps-horizontal:not(.ant-steps-label-vertical)
+      .ant-steps-item {
+      padding-left: 27px;
+    }
+
+    .ant-steps-item::before {
+      background-color: var(--tp-new_theme-3);
+    }
+
+    .ant-steps-item-active .ant-steps-icon {
+      color: var(--tp-new_theme-7);
+    }
+
+    .ant-steps-item-active .ant-steps-item-icon {
+      background-color: var(--tp-new_theme-3);
+    }
+
+    .ant-steps-item-finish .ant-steps-item-icon {
+      border-color: var(--tp-new_theme-3);
+    }
+
+    .ant-steps-item-finish .ant-steps-icon {
+      color: var(--tp-new_theme-3);
+    }
+
+    .ant-steps-item-wait .ant-steps-item-icon {
+      background-color: var(--tp-new_theme-6);
+    }
+
+    .ant-steps-item-wait .ant-steps-icon {
+      color: var(--tp-new_theme-7);
+    }
+  }
+
+  .teacher-application-step-wrapper {
+    padding: 40px 30px;
+    .next-step-btn {
+      width: fit-content;
+      min-width: 80px;
+      height: 40px;
+      background: var(--tp-new_theme-3) 0% 0% no-repeat padding-box;
+      border-radius: 10px;
+      border: none;
+      color: var(--tp-new_theme-6);
+    }
+    .prev-step-btn {
+      width: fit-content;
+      min-width: 80px;
+      height: 40px;
+      background: var(--tp-new_theme-7) 0% 0% no-repeat padding-box;
+      border: 1px solid #707070;
+      border-radius: 10px;
+      color: var(--tp-new_theme-1);
+      font-weight: bold;
+      margin-right: 20px;
+    }
+
+    .teacher-application-form-title {
+      font-size: 22px;
+      font-weight: 600;
+
+      color: #4a4a4a;
+    }
+    .teacher-application-form-sub-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .teacher-application-form-description {
+      font-size: 12px;
+      color: #707070;
+      font-weight: 600;
+    }
+    .question-mark-img {
+      width: 22px;
+      margin-left: 6px;
+    }
+    .form-btn-group {
+      margin-top: 30px;
+    }
+    .teacher-application-step1 {
+      .teacher-application-step1-form {
+        color: var(--tp-new_theme-1);
+        margin-top: 20px;
+        input,
+        select {
+          height: 32px;
+          width: 100%;
+          outline: none;
+          border: none;
+          background: var(--tp-new_theme-7) 0% 0% no-repeat padding-box;
+          border: 1px solid #b8b8be;
+          font-size: 12px;
+          padding-left: 10px;
+        }
+        label {
+          font-size: 14px;
+          font-weight: 600;
+        }
+        .sub-label {
+          font-size: 12;
+          font-weight: 500;
+        }
+        div {
+          margin-bottom: 15px;
+        }
+        select > option {
+          color: var(--tp-new_theme-1);
+          font-weight: initial;
+        }
+
+        select option[value=""] {
+          color: var(--tp-new_theme-6);
+        }
+
+        select[required]:invalid {
+          color: var(--tp-new_theme-6);
+        }
+        .language-spoken-wrapper {
+          display: flex;
+          justify-content: space-between;
+          .language-spoken-item {
+            flex-basis: 45%;
+            margin-bottom: 0px;
+          }
+        }
+        .hourly-rate-input {
+          width: 30%;
+          margin-right: 5px;
+        }
+        .dollar-sign {
+          font-size: 18px;
+        }
+        .checkbox {
+          width: 15px;
+          height: 15px;
+          margin-right: 5px;
+        }
+        .confirm-text {
+          font-size: 15px;
+        }
+        .add-new-language-btn {
+          color: var(--tp-new_theme-3);
+          font-size: 14px;
+          border: none;
+          background-color: none;
+          margin: 5px 0px;
+        }
+        .add-new-language-btn:hover {
+          text-decoration: underline;
+        }
+        .add-new-language-wrapper {
+          width: 100%;
+          .add-new-language-name {
+            width: 45%;
+            margin-right: 20px;
+          }
+          .add-new-language-name::-webkit-input-placeholder {
+            color: var(--tp-new_theme-6);
+          }
+          .add-new-language-code {
+            display: inline-block;
+            width: 25%;
+          }
+          .add-new-language-code::-webkit-input-placeholder {
+            color: var(--tp-new_theme-6);
+          }
+        }
+      }
+      .selected-language-teaching {
+        display: flex;
+        margin-top: 20px;
+        flex-wrap: wrap;
+        div {
+          background: var(--tp-new_theme-4) 0% 0% no-repeat padding-box;
+          border-radius: 20px;
+          padding: 5px 10px;
+          color: var(--tp-new_theme-1);
+          margin-right: 15px;
+        }
+      }
+    }
+    .teacher-application-step2 {
+      .drag-drop-img {
+        width: 100%;
+        min-width: 330px;
+        height: 300px;
+        background: var(--tp-new_theme-7) 0% 0% no-repeat padding-box;
+        border: 1px solid #9d9d9d;
+        border-radius: 3px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        img {
+          display: block;
+          margin: auto;
+        }
+
+        span {
+          color: #767778;
+          font-weight: 400;
+        }
+        img:hover {
+          opacity: 0.5;
+        }
+      }
+    }
+    .teacher-application-step3-form {
+      display: flex;
+      width: 100%;
+      .left-column {
+        margin-right: 20px;
+      }
+      .right-column {
+        width: 100%;
+        input {
+          height: 32px;
+          width: 100%;
+          outline: none;
+          border: none;
+          background: var(--tp-new_theme-7) 0% 0% no-repeat padding-box;
+          border: 1px solid #b8b8be;
+          font-size: 12px;
+          padding-left: 10px;
+        }
+        input::-webkit-input-placeholder {
+          color: rgba(192, 192, 197, 1);
+        }
+
+        label {
+          font-size: 14px;
+          font-weight: 600;
+        }
+        div {
+          margin-bottom: 20px;
+        }
+        .describe-yourself-input {
+          width: 100%;
+          min-width: 330px;
+          height: 300px;
+          resize: none;
+          font-size: 12px;
+        }
+      }
+    }
+    .teacher-application-step4 {
+      .record-area {
+        width: 100%;
+        height: 400px;
+        background: #9b9b9b 0% 0% no-repeat padding-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #test-camera-btn {
+        border: 1px solid var(--tp-new_theme-4);
+        background-color: transparent;
+        color: var(--tp-new_theme-4);
+      }
+      .webcam-wrapper {
+        position: relative;
+        background-color: #9b9b9b;
+        height: 480px;
+        width: fit-content;
+
+        .test-recording-btn {
+          background: var(--tp-new_theme-4) 0% 0% no-repeat padding-box;
+          border: 1px solid var(--tp-new_theme-4);
+          position: absolute;
+          bottom: 0px;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 15px;
+          color: var(--tp-new_theme-3);
+        }
+
+        .discard-recording-btn {
+          width: 115px;
+          height: 35px;
+          background: var(--tp-new_theme-7) 0% 0% no-repeat padding-box;
+          border-radius: 10px;
+          color: var(--tp-new_theme-1);
+          font-weight: 600;
+          text-align: center;
+          border: none;
+          margin-right: 10px;
+          display: block;
+        }
+        .keep-recording-btn {
+          width: 115px;
+          height: 35px;
+          text-align: center;
+          border: none;
+          background: var(--tp-new_theme-3) 0% 0% no-repeat padding-box;
+          border-radius: 10px;
+          color: var(--tp-new_theme-6);
+          font-weight: 600;
+          display: block;
+        }
+        .discard-keep-btn {
+          display: flex;
+          justify-content: center;
+        }
+        .square-stop-recording-img {
+          display: inline-block;
+          width: 10px;
+          height: 10px;
+          background: var(--tp-new_theme-7) 0% 0% no-repeat padding-box;
+          border-radius: 3px;
+        }
+      }
+    }
+    .teacher-application-step5-form {
+      .timezone,
+      option {
+        width: fit-content;
+      }
+
+      .set-your-timezone-label {
+        color: var(--tp-new_theme-1);
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .set-availability-label {
+        color: var(--tp-new_theme-1);
+        font-size: 17px;
+        font-weight: 600;
+        margin-top: 25px;
+      }
+      select > option {
+        color: var(--tp-new_theme-1);
+        font-weight: initial;
+      }
+
+      select option[value=""] {
+        color: var(--tp-new_theme-6);
+      }
+
+      select[required]:invalid {
+        color: var(--tp-new_theme-6);
+      }
+    }
+
+    .video-instruction-wrapper {
+      width: 100%;
+      .start-recording-btn {
+        background: #feb055 0% 0% no-repeat padding-box;
+        border-radius: 7px;
+        border: none;
+        color: var(--tp-new_theme-1);
+        margin-right: 15px;
+        padding: 5px;
+        font-weight: 600;
+      }
+
+      .test-camera-btn {
+        background: var(--tp-new_theme-3) 0% 0% no-repeat padding-box;
+        border-radius: 7px;
+        margin-right: 15px;
+        padding: 5px;
+        font-weight: 600;
+        border: none;
+        color: var(--tp-new_theme-6);
+      }
+    }
+  }
+}
+.availability-option-wrapper {
+  select {
+    padding: 5px;
+    padding-right: 35px;
+  }
+  span {
+    margin: 0 15px;
+  }
+}
+#video-replay {
+  width: 100%;
+}
+.hidden {
+  display: none;
+  // visibility: hidden;
+}
+
+.ant-steps-navigation {
+  .ant-steps-item {
+    text-align: left;
+  }
+}
+.ant-steps-navigation.ant-steps-vertical > .ant-steps-item::after {
+  display: none;
+}
+.paste-video-link-form {
+  width: 100%;
+  margin-top: 40px;
+  input {
+    height: 32px;
+    width: 100%;
+    outline: none;
+    border: none;
+    background: var(--tp-new_theme-7) 0% 0% no-repeat padding-box;
+    border: 1px solid #b8b8be;
+    font-size: 12px;
+    padding-left: 10px;
+  }
+
+  label {
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
+
+.container-custom-checkbox {
+  display: block;
+  position: relative;
+  padding-left: 23px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  span {
+    font-size: 16px;
+  }
+}
+
+.container-custom-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  height: 15px;
+  width: 15px;
+  background-color: var(--tp-new_theme-7);
+  border: var(--tp-new_theme-1) 1px solid;
+}
+
+/* On mouse-over, add a grey background color */
+.container-custom-checkbox:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container-custom-checkbox input:checked ~ .checkmark {
+  background-color: var(--tp-new_theme-3);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container-custom-checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container-custom-checkbox .checkmark:after {
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 9px;
+  border: solid var(--tp-new_theme-7);
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.error {
+  color: red;
+}
+#confirm-box {
+  position: absolute;
+  width: 35%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 450px;
+  min-height: 280px;
+  background: var(--tp-new_theme-7) 0% 0% no-repeat padding-box;
+  box-shadow: 8px 8px 28px #00000029;
+  border-radius: 10px;
+  padding: 5% 6%;
+  text-align: center;
+  img {
+    margin-bottom: 50px;
+  }
+  .confirm-box-heading {
+    font-weight: 600;
+    color: var(--tp-new_theme-2);
+  }
+  .confirm-box-content {
+    font-size: 14px;
+  }
+  .confirm-box-btn {
+    background: var(--tp-new_theme-3) 0% 0% no-repeat padding-box;
+    border-radius: 10px;
+    color: var(--tp-new_theme-6);
+    border: none;
+    width: 90%;
+    margin-top: 30px;
+    padding: 15px 5px;
+  }
+}
+
+.opacity-wrapper {
+  opacity: 0.68;
+}
+.disable-scroll {
+  overflow: hidden;
+}
+
+@media only screen and (max-width: 700px) {
+  .breadcrumb-teacher-register-form {
+    margin-top: 15% !important;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .language-spoken-wrapper {
+    flex-direction: column;
+  }
+}
+@media only screen and (max-width: 995px) {
+  .teacher-application {
+    padding: 10% 10% !important;
+  }
+}
+
+//THEME UTEAM
+.teacher__application {
+  .ant-btn-primary[disabled],
+  .ant-btn-primary[disabled]:hover,
+  .ant-btn-primary[disabled]:focus,
+  .ant-btn-primary[disabled]:active {
+    color: var(--tp-new_theme-7);
+  }
+
+  button:focus {
+    border: 1px solid;
+  }
+  .ant-form-item-label > label {
+    font-weight: 800;
+  }
+}
+
+.breadcrumb-teacher-register-section {
+  .ant-form-item-control-input-content {
+    display: flex;
+    justify-content: center;
+    &:has(.ant-input-affix-wrapper) {
+      background: var(--tp-new_theme-7);
+      border-radius: 6px;
+      padding-top: 16px;
+      box-shadow: 0px 3px 6px #00000029;
+    }
+  }
+  .ant-form-item-label {
+    position: absolute;
+    margin-left: 11px;
+    label {
+      font-size: 11px;
+      color: #aeaeb2;
+      z-index: 1;
+    }
+  }
+
+  .ant-input-suffix {
+    top: -10px;
+    position: relative;
+  }
+}

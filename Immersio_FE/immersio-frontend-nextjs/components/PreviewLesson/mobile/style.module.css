@@ -1,0 +1,373 @@
+.step {
+  text-align: center;
+  /* height: 660px; */
+  min-height: calc(100vh - 125px);
+  overflow-y: auto;
+  height: calc(100vh - 125px);
+  padding-bottom: 130px;
+}
+.stepIntroduction {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.stepTabs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.stepTabs .stepTabItem {
+  width: 8px;
+  height: 8px;
+  margin: 0 5px;
+ /* UI Properties */
+  background: #c0c0c4 0% 0% no-repeat padding-box;
+  border-radius: 4px;
+}
+.stepTabs .stepTabItem.active {
+  width: 34px;
+  /* background: var(--tp-new_theme-4) 0% 0% no-repeat padding-box; */
+}
+.stepCards {
+  margin-top: 13px;
+  position: relative;
+  display: inline-block;
+}
+.stepCardItem {
+  margin: auto;
+  position: relative;
+  z-index: 1;
+  width: 600px;
+  max-width: 600px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.stepCardItem .title {
+  text-align: center;
+  font: normal normal bold 30px/37px Roboto;
+  letter-spacing: 0px;
+  color: var(--tp-new_theme-3);
+}
+.stepCardItem .title.custom {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.stepCardItem .image {
+  height: 300px;
+}
+.stepCardItem .video {
+  height: 300px;
+}
+.stepCardItem .titleTrans {
+  height: 300px;
+  width: 100%;
+  max-width: 600px;
+  /* background: var(--tp-new_theme-2) 0% 0% no-repeat padding-box; */
+  /* box-shadow: 0px 16px 30px #043B3429; */
+  border-radius: 5px;
+  
+  font: normal normal bold 50px/82px Euphemia UCAS;
+  letter-spacing: 0px;
+  color: var(--tp-new_theme-6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.stepCardItem .video-trans {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 193px;
+ /* UI Properties */
+  /* background: var(--tp-new_theme-3) 0% 0% no-repeat padding-box; */
+  
+  border-radius: 24px;
+  overflow: hidden;
+}
+.stepCardItem .video-trans > img {
+  max-width: inherit !important;
+  height: 100% !important;
+}
+.stepCardItem .video-trans .video-overlay {
+  display: block;
+  right: 14px;
+  bottom: 10px;
+  top: auto;
+  left: auto;
+  width: 32px;
+  height: 32px;
+}
+.stepCardItem .video-trans .video-overlay img {
+  width: 32px;
+}
+.stepCardItem .title-sub-trans {
+  right: 60px;
+  left: 13px;
+  bottom: 13px;
+  font: normal normal bold 18px/25px Euphemia UCAS;
+  letter-spacing: 0px;
+  color: var(--tp-new_theme-6);
+  line-height: 40px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-align: right;
+}
+.stepCardItem .sound {
+  cursor: pointer;
+  background: var(--tp-new_theme-4) 0% 0% no-repeat padding-box;
+  border: 2px solid #FFFFFF;
+  border-radius: 60px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.stepCardItem .sound > div {
+  margin: 0 !important;
+}
+.stepCardItem .sound .pause-icon {
+  height: 42px;
+}
+.stepCardItem .sound img {
+  width: 36px !important;
+  filter: invert(1) !important;
+}
+.stepCardItem .sound svg {
+  font-size: 30px !important;
+  fill: var(--tp-new_theme-7);
+}
+.stepCardExplain {
+  margin-top: 40px;
+  text-align: center;
+  font: normal normal normal 20px/24px Roboto;
+  max-width: 600px;
+}
+/* .actions {
+  text-align: center;
+  position: absolute;
+  bottom: 20px;
+  width: 90%;
+} */
+/* .nextProgress, .arrowLeft, .arrowRight{
+  display: inline-block;
+  font-size: 30px;
+} */
+.buttonContainer {
+  display: inline-block;
+}
+
+.processWrapper {
+  position: absolute;
+  bottom: 80px;
+  z-index: 999;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background-color: var(--tp-new_theme-6);
+}
+
+.process {
+  height: 5px;
+  background-color: var(--tp-new_theme-3);
+}
+
+.resetPreview {
+  position: absolute;
+  left: 30px;
+  bottom: 0;
+  z-index: 22222;
+  color: var(--tp-new_theme-3);
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.actions {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--tp-new_theme-6) 0% 0% no-repeat padding-box;
+  height: 80px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.actions > div {
+  background: var(--tp-new_theme-7) 0% 0% no-repeat padding-box;
+  border-radius: 16px;
+  margin: 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: 0;
+}
+.actions > div:hover {
+  background: var(--tp-new_theme-6);
+}
+.actions .arrowLeft {
+  width: 50px;
+  height: 50px;
+  color: var(--tp-new_theme-3);
+}
+.actions .arrowLeft.disabled {
+  pointer-events: none;
+}
+.actions .action-icon {
+  position: relative;
+  background: transparent;
+  box-shadow: none;
+  border: 0 none;
+}
+.actions .action-icon svg {
+  fill: var(--tp-new_theme-4);
+}
+.actions .action-icon::before {
+  content: '';
+  position: absolute;
+  top: -35px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 12px solid var(--tp-new_theme-4);
+}
+.actions .nextProgress {
+  width: 64px;
+  height: 64px;
+}
+.actions .nextProgress.changeColor {
+  background-color: var(--tp-new_theme-5);
+}
+.actions .arrowRight {
+  width: 50px;
+  height: 50px;
+  color: var(--tp-new_theme-3);
+}
+.actions .arrowRight.disabled {
+  pointer-events: none;
+}
+.video {
+  position: relative;
+}
+.videoOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.stepComplete {
+  height: calc(100vh - 246px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.stepComplete .complete-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.stepComplete .complete-box img {
+  max-width: 86px;
+}
+.stepComplete .complete-box div {
+  margin: 26px 0;
+}
+.stepComplete .complete-box div b {
+  font: normal normal bold 25px/30px Roboto;
+  letter-spacing: 0px;
+  color: #d26c32;
+}
+.stepComplete .complete-box p {
+  font: normal normal normal 14px/17px Roboto;
+  letter-spacing: 0.21px;
+  color: var(--tp-new_theme-1);
+}
+
+@media (max-width: 767px) {
+  .step {
+    min-height: calc(100vh - 65px);
+    height: calc(100vh - 65px);
+    padding-bottom: 80px;
+  }
+  .step02 {
+    margin-top: -24px !important;
+  }
+  .stepVideoWrapper {
+    width: 100% !important;
+  }
+  .introduction {
+    padding: 0 15px;
+    margin-top: 15px;
+  }
+  .resetPreview {
+    left: 15px;
+  }
+  .processWrapper {
+    top: 0;
+  }
+  .actions {
+    background: white;
+  }
+  .resetPreviewDialog {
+    bottom: 50px;
+  }
+  .actions > div {
+    box-shadow: 0px 7px 24px #37474F1F;
+  }
+  .stepCards {
+    /* transform: scale(0.85); */
+    transform-origin: top center;
+    height: auto;
+  }
+  .stepCards,
+  .stepCardItem,
+  .stepCardItem .video,
+  .stepCardItem .image {
+    width: 100%;
+  }
+  .stepCardItem .titleTrans,
+  .stepCardItem .video,
+  .stepCardItem .image {
+    height: 230px;
+  }
+  .stepTabs {
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+  .stepIntroduction {
+    margin-bottom: 0;
+  }
+  .stepCardExplain {
+    margin-top: 20px;
+    padding: 0 15px;
+  }
+}

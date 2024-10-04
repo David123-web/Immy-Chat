@@ -1,0 +1,72 @@
+.outerDiv {
+    touch-action: none;
+    user-select: none;
+    -ms-touch-action: none;
+}
+
+.fragmentsDiv {
+    font-size: 20px;
+    text-align: center;
+}
+
+.fragmentsContainer {
+    display: inline-block;
+    text-align: left;
+}
+
+.fragmentsContainer span {
+    white-space: pre-wrap;
+}
+
+.wordsDiv {
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.emptyBox {
+    width: 150px;
+    border: 1px solid var(--tp-new_theme-5);
+    display: inline-block;
+    height: 40px;
+    border-radius: 20px;
+}
+
+.wordBox {
+    display: inline-block;
+    color: var(--tp-new_theme-7);
+    text-align: center;
+    margin: 3px;
+    font-size: large;
+    background-color: var(--tp-new_theme-5);
+    border-radius: 20px;
+    width: 150px;
+    height: 40px;
+}
+
+.draggable {
+    touch-action: none;
+    user-select: none;
+    -ms-touch-action: none;
+}
+
+.correct {
+
+    background-color: var(--tp-new_theme-5);
+}
+
+.wrong {
+    background-color: rgba(185, 183, 190, 0.752);
+}
+
+.no {
+    background-color: var(--tp-new_theme-5);
+}
+
+.correctCount {
+    text-align: center;
+}
+
+.hide {
+    visibility: hidden;
+}

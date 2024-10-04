@@ -1,0 +1,30 @@
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - "5000:8080"
+    depends_on:
+      - mongo
+    environment:
+      AWS_ACCESS_ID_KEY: ${AWS_ACCESS_ID_KEY}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_REGION_ID: ${AWS_REGION_ID}
+      AWS_REGION: ${AWS_REGION}
+      OPENAI_ORGANIZATION: ${OPENAI_ORGANIZATION}
+      OPENAI_APIKEY: ${OPENAI_APIKEY}
+      API_USERNAME: ${API_USERNAME}
+      API_PASSWORD: ${API_PASSWORD}
+      IMMERSIO_BE_BASE_URL: ${IMMERSIO_BE_BASE_URL}
+      MONGO_URL: mongodb://mongo:27017
+      ADAPTIVE_LEARNING_URL: ${ADAPTIVE_LEARNING_URL}
+
+  mongo:
+    image: mongo:latest
+    volumes:
+      - mongodata:/data/db
+    ports:
+      - "27017:27017"
+
+volumes:
+  mongodata:

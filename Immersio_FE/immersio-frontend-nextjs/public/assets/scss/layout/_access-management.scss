@@ -1,0 +1,8 @@
+.switch-role {
+    .ant-form-item-row {
+        flex-direction: row-reverse;
+    }
+    .ant-form-item-label > label::after {
+        content: '';
+    }
+}

@@ -1,0 +1,45 @@
+.paragraphStyle {
+    display: inline;
+    margin-left:auto;
+}
+
+.space {
+    margin-left: auto;
+}
+
+.correctMark {
+    margin-left: 10px;
+}
+ 
+.itemStyle {
+    border: 1px solid #999;
+    padding: 5px;
+    border-radius: 5px;
+    display: flex;
+    margin-bottom: 10px;
+ }
+
+ .defaultBackground {
+    background-color: var(--tp-new_theme-7);
+ }
+
+ .correctBackground {
+    background-color: var(--tp-new_theme-5);
+ }
+
+ .wrongBackground {
+    background-color: rgba(185, 183, 190, 0.752);
+ }
+ 
+.iconStyle {
+    vertical-align: middle;
+    font-size: 150%;
+    color: var(--tp-new_theme-2);
+    margin-right: 10px;
+ }
+
+ .iconWrapper {
+    display: flex;
+    margin-left: auto;
+}
+

@@ -1,0 +1,341 @@
+@use '../utils' as *;
+
+@media (max-width: 767px) {
+  body {
+    .hide-mobile {
+      display: none;
+    }
+
+    .mb-30-mobile {
+      margin-bottom: 30px;
+    }
+
+    .d-flex-mobile {
+      flex-direction: column;
+    }
+
+    .header__sticky.header__sticky {
+      min-height: 54px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+
+      .header__area {
+        flex: 1;
+      }
+    }
+
+    .slider__area {
+      margin-top: 68px;
+      height: auto;
+
+      .slider__overlay {
+        background: var(--tp-new_theme-3);
+        min-width: auto;
+      }
+
+      .slider__item {
+        &-left {
+          margin: 85px 0;
+          padding-bottom: 0;
+          padding-left: 25px;
+          padding-right: 25px;
+
+          .slider__title {
+            padding-top: 0;
+          }
+
+          .slider__list {
+            flex-wrap: wrap;
+          }
+        }
+
+        &-right {
+          position: relative;
+
+          img {
+            max-width: 100%;
+            display: block;
+            margin: auto;
+            height: auto;
+          }
+        }
+      }
+    }
+
+    .course__area {
+      // padding-top: 35px;
+      padding-bottom: 0px;
+    }
+
+    .book-with-teacher__wrapper {
+      margin-bottom: 15px;
+    }
+
+    .modify-margin-mobile > div {
+      margin-bottom: 10px;
+    }
+
+    .app__inner-mobile {
+      margin: 0 -10px;
+      padding: 30px 15px;
+
+      > div {
+        justify-content: center;
+        text-align: center;
+
+        .app__wrapper {
+          margin-bottom: 30px;
+
+          .app__title {
+            margin-bottom: 15px;
+          }
+
+          .app__desc {
+            font-size: 16px;
+          }
+        }
+      }
+
+      .app__download {
+        .app__item {
+          margin-right: 0;
+        }
+      }
+    }
+    
+    .about__area {
+      padding-top: 150px;
+      padding-bottom: 50px;
+
+      .about__content {
+        margin-top: 0;
+        padding-right: 0;
+    
+        .section__title-wrapper {
+          text-align: center;
+        }
+    
+        .about__list {
+          margin-bottom: 0;
+        }
+    
+        .about__btn {
+          text-align: center;
+        }
+      }
+    }
+
+    .book-with-teacher__area {
+      padding-top: 50px;
+
+      @media #{$xs} {
+        padding: 0 16px 0;
+      }
+
+      .book-block-filter {
+        flex-wrap: wrap;
+        flex-direction: column;
+
+        > div {
+          width: 100%;
+          margin-bottom: 10px;
+          margin-left: 0;
+          margin-right: 0;
+
+          &.book-block-filter__search {
+            button {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+
+    .event__area {
+      padding-top: 50px;
+
+      .event__item {
+        box-shadow: 0px 0px 14px #ddd;
+        // max-width: 70%;
+        margin: auto;
+      }
+    }
+
+    .team__area {
+      padding-top: 50px;
+
+      @media #{$xs} {
+        padding-top: 30px;
+      }
+    }
+
+    .faq__area {
+      .faq__wrapper {
+        padding-top: 50px;
+      }
+
+      .faq__tabs {
+        > li {
+          margin-bottom: 10px;
+        }
+      }
+
+      .faq__item-wrapper {
+        margin-top: 0;
+      }
+    }
+
+    .course-details-section {
+      .course__tab-2 .nav-tabs .nav-item .nav-link span {
+        display: block;
+      }
+    }
+
+    .lesson-preview-introduction-content {
+      .course__tab-2 .nav-tabs .nav-item .nav-link span {
+        display: block;
+      }
+    }
+
+    .teacher-application-wrapper {
+      .teacher-application {
+        margin-top: 68px;
+        padding-bottom: 120px !important;
+      }
+    }
+
+    .breadcrumb-teacher-register-section {
+      height: auto;
+      padding-bottom: 20px;
+
+      .breadcrumb-teacher-register-form {
+        width: 100%;
+        margin-top: 68px !important;
+      }
+
+      &.mobile {
+        .breadcrumb-teacher-register-form-info {
+          // display: none;
+          float: none;
+        }
+        .breadcrumb-teacher-register-form {
+          float: none;
+        }
+      }
+    }
+
+    .landing-page {
+      &-wrapper {
+        padding: 50px 0 !important;
+      }
+
+      &-row {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      &-col {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+
+    .teach__area-first-mobile {
+      padding-top: 50px;
+    }
+
+    .teach__area-mobile {
+      padding-bottom: 50px;
+
+      .teach__content {
+        padding: 0 30px;
+        margin-top: 30px;
+      }
+    }
+
+    .price-section {
+      .price-deals {
+        flex-direction: column;
+        margin-bottom: 0;
+  
+        .deal {
+          margin-bottom: 30px;
+        }
+      }
+
+      .modal-content {
+        width: 100% !important;
+      }
+    }
+
+    .app__area-price {
+      margin-bottom: -15px;
+    }
+
+    .course-introduction__area {
+      padding-top: 50px;
+      padding-bottom: 50px;
+      background-color: var(--tp-new_theme-6);
+
+      .course-introduction__thumb-wrapper {
+        margin-right: 0;
+      }
+
+      .course-introduction__content {
+        padding: 0 30px;
+        margin-top: 15px;
+      }
+    }
+
+    .course-details-section .course-details-top-info {
+      .course__master-banner__right {
+        img {
+          display: block;
+          margin: auto;
+          max-width: 100%;
+          height: auto;
+        }
+      }
+
+      .course__video {
+        margin-top: 30px;
+      }
+    }
+
+    .tags-mobile {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 50px;
+    }
+
+    .book-with-teacher__block .book-block-wrapper__item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .swiper-wrapper-mobile {
+      padding: 0;
+      width: calc(100vw - 30px);
+
+      .swiper-slide-mobile {
+        width: 100% !important;
+      }
+    }
+
+    .footer__area {
+      .footer__top {
+        display: none;
+      }
+
+      .footer__bottom {
+        padding-top: 160px;
+        text-align: center;
+
+        .footer__bottom-inner {
+          border-top: 0 none;
+        }
+      }
+    }
+  }
+}

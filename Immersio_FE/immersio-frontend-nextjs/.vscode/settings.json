@@ -1,0 +1,36 @@
+{
+	"editor.tabSize": 2,
+	"editor.detectIndentation": false,
+	"search.exclude": {
+		"package-lock.json": true,
+		"node_modules": true,
+		"yarn.lock": true,
+		"pnpm-lock.yaml": true
+	},
+	"editor.defaultFormatter": "dbaeumer.vscode-eslint",
+	"editor.formatOnSave": false,
+	"editor.codeActionsOnSave": ["source.addMissingImports", "source.fixAll.eslint"],
+	"typescript.tsdk": "node_modules/typescript/lib", // Use the workspace version of TypeScript
+	"typescript.enablePromptUseWorkspaceTsdk": true, // For security reasons it's require that users opt into using the workspace version of typescript
+	// Multiple language settings for json and jsonc files
+	"[json][jsonc][yaml]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"prettier.ignorePath": ".gitignore",
+	"[typescript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"files.watcherExclude": {
+		"**/target": true
+	} // Don't run prettier for files listed in .gitignore
+}
